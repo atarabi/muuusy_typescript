@@ -1,0 +1,32 @@
+/*
+ * reset
+ */
+
+global-reset();
+
+*{
+  box-sizing: border-box;
+}
+
+html, body
+  height: 100%
+
+body
+  font-family: $openSans
+  font-size: $txtSize
+  font-weight: $fwThin
+  line-height: $lineHeight
+  color: $txtColor
+  min-width: $minWidth
+
+input
+  font-size: $txtSize
+  color: $txtColor
+
+img
+  vertical-align: bottom
+
+a
+  cursor: pointer
+  &:hover
+    text-decoration: underline

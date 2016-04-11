@@ -1,0 +1,172 @@
+/*
+ * loader
+ */
+
+#loader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  .loaderWrapper{
+    background-color: rgba(0, 0, 0, 0);
+  }
+  * {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    list-style: none;
+  }
+}
+
+.loaderWrapper{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  .throbbers_page {
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    position: fixed;
+  }
+  ul.throbbers_list {
+    margin-top: -100px
+  }
+  .throbbers_page .thobbers_container {
+    display: block;
+
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    position: relative;
+    width: 550px;
+    height: 450px;
+    background: #f0f4f5;
+  }
+  .throbbers_page .thobbers_container ul.throbber_containers {
+    display: block;
+    position: relative;
+    width: 300px;
+  }
+  .throbbers_page .thobbers_container ul.throbber_containers > li {
+    width: 100%;
+    height: 70px;
+    display: block;
+    position: relative;
+    border-radius: 2px;
+    margin: 20px 0 20px 0;
+  }
+  .throbbers_page .thobbers_container ul.throbber_containers > li.throbbers_dark_bg {
+    background: #363b4a;
+  }
+  .throbbers_page .thobbers_container ul.throbber_containers > li > ul.throbbers_list {
+    display: block;
+    position: relative;
+
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: space-between;
+
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+  }
+  .throbbers_page .thobbers_container ul.throbber_containers > li > ul.throbbers_list > li {
+    width: 45px;
+    height: 70px;
+    display: block;
+    position: relative;
+  }
+  .throbbers_page .throbber {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+
+    justify-content: center;
+  }
+  .throbbers_page .throbber:after {
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    animation: rotate 0.6s linear infinite;
+    border-radius: 100%;
+    border-top: 2px solid #545a6a;
+    border-bottom: 2px solid #d4d4db;
+    border-left: 2px solid #545a6a;
+    border-right: 2px solid #d4d4db;
+    content: '';
+    opacity: .5;
+  }
+  .throbbers_page .throbber.throbber_large:after {
+    width: 40px;
+    height: 40px;
+  }
+  $keyframe-name = rotate
+  @keyframes rotate {
+    0% {
+      transform: rotateZ(-360deg);
+    }
+    100% {
+      transform: rotateZ(0deg);
+    }
+  }
+}

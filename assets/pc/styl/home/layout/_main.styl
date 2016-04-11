@@ -1,0 +1,149 @@
+/*
+ * main
+ */
+
+#home
+  width: 100%
+  height: 100%
+
+  .pageView
+    padding-top: 55px
+  h2
+    padding: 10px
+    font-size: 24px
+  img.profImg
+    width: 200px
+    height: 200px
+    border-radius: 50%
+  .albumList
+    position: relative
+    margin: 0 auto
+    li
+      display: table
+      width: 10vw /* n=10 */
+      height: 10vw
+      line-height: $listLineHeight
+      background-color: #000
+      z-index: 1
+      a
+        display: table-cell
+        width: 100%
+        height: 100%
+        text-align: center
+        vertical-align: middle
+      img
+        width: 100%
+        height: auto
+        -webkit-transition: transform 0.2s linear
+        transition: transform 0.2s linear
+        &.fixHeight
+          width: auto
+          height: 10vw
+      &:hover
+        z-index: 2
+        img
+          -webkit-transform: scale(1.1)
+          transform: scale(1.1)
+  .loaderWrapper
+    width: 100%
+    height: 100%
+
+  .albumDetailModal
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 4
+    .albumDetail
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 440px
+      height: auto
+      padding: 54px 20px 20px
+      background-color: #fff;
+      border-radius: 4px
+      transform: translate(-50%, -50%)
+    .modalCloseTrigger
+      position: absolute
+      top: 10px
+      right: 10px
+      a
+        display: block
+        &:hover
+          text-decoration: none
+        i
+          display: block
+          width: 34px
+          height: 34px
+          font-size: 34px
+    .detailImg
+      margin-bottom: 10px;
+    .modalFavTrigger
+      float: right
+      width: 40px
+      margin-top: 10px
+      a
+        display: block
+        &:hover
+          text-decoration: none
+        i
+          display: block
+          width: 40px
+          height: 40px
+          font-size: 40px
+
+
+
+
+@media screen and (max-width: 1500px)
+  #home
+    .albumList
+      li
+        width: 12.5vw /* n=8 */
+        height: 12.5vw
+        img
+          &.fixHeight
+            height: 12.5vw
+
+@media screen and (max-width: 1400px)
+  #home
+    .albumList
+      li
+        width: 14.29vw /* n=7 */
+        height: 14.29vw
+        img
+          &.fixHeight
+            height: 14.29vw
+
+@media screen and (max-width: 1200px)
+  #home
+    .albumList
+      li
+        width: 16.67vw /* n=6 */
+        height: 16.67vw
+        img
+          &.fixHeight
+            height: 16.67vw
+
+@media screen and (max-width: 1000px)
+  #home
+    .albumList
+      li
+        width: 20vw /* n=5 */
+        height: 20vw
+        img
+          &.fixHeight
+            height: 20vw
+
+@media screen and (max-width: 800px)
+  #home
+    .albumList
+      li
+        width: 25vw /* n=4 */
+        height: 25vw
+        img
+          &.fixHeight
+            height: 25vw

@@ -1,0 +1,31 @@
+{
+
+    "browser": true,
+    "node": true,
+    "jquery": true,
+
+    "globals": {
+      "JSON": false
+    },
+
+    "bitwise": true,
+    "curly": true,
+    "devel": true,
+    "eqeqeq": true,
+    "es3": true,
+    "forin": true,
+    "freeze": true,
+    "immed": false,
+    "latedef": "nofunc",
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "plusplus": false,
+    "quotmark": "single",
+    "undef": true,
+    "unused": true,
+    "strict": false,
+
+    "expr": true
+}

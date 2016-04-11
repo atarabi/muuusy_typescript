@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" prefix="og: http://ogp.me/ns#"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#"><!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <title>MUUUSY - Home</title>
+  <meta content="タイトル - XXX" name="title">
+  <meta content="120字以内を心がけよう。その中でも最初の４０字は大事。" name="description">
+  <meta content="キーワード, 5~6個がお薦め, 本文に書けなかったキーワード" name="keywords">
+
+  <link rel="stylesheet" href="/css/home/index.css">
+  <% include ../_partials/head %>
+</head>
+<body>
+
+  <div id="home">
+
+    <% include ../_partials/header %>
+
+    <div id="homeView" class="pageView">
+      <% include ./_partials/homeView %>
+    </div>
+
+    <div id="searchView" class="pageView hide">
+      <% include ./_partials/searchView %>
+    </div>
+
+    <div id="mypageView" class="pageView hide">
+      <% include ./_partials/mypageView %>
+    </div>
+
+  </div>
+
+  <script src="/js/home.js"></script>
+</body>
+</html>

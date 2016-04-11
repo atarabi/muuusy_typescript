@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2,
+    "newLineCharacter": "\r\n",
+    "convertTabsToSpaces": true,
+    "insertSpaceAfterCommaDelimiter": true,
+    "insertSpaceAfterSemicolonInForStatements": true,
+    "insertSpaceBeforeAndAfterBinaryOperators": true,
+    "insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": true,
+    "placeOpenBraceOnNewLineForControlBlocks": true
+  },
+  "compileOnSave": false,
+  "filesGlob": [
+    "./**/*.ts",
+    "!./node_modules/**/*.ts",
+    "!./bower_components/**/*.ts",
+    "!./typings/**/*.ts"
+  ],
+  "files": [
+    "./assets/pc/ts/_api/mock.ts",
+    "./assets/pc/ts/_module/fn/checkEnterKeypress.ts",
+    "./assets/pc/ts/_module/interfaces/AlbumListViewArgsType.ts",
+    "./assets/pc/ts/_module/interfaces/AlbumType.ts",
+    "./assets/pc/ts/_module/interfaces/BaseViewArgsType.ts",
+    "./assets/pc/ts/_module/interfaces/HeaderViewArgsType.ts",
+    "./assets/pc/ts/_module/interfaces/PageStatusType.ts",
+    "./assets/pc/ts/_module/interfaces/PageViewArgsType.ts",
+    "./assets/pc/ts/_module/interfaces/StatusType.ts",
+    "./assets/pc/ts/_module/models/AlbumModel.ts",
+    "./assets/pc/ts/_module/models/BaseModel.ts",
+    "./assets/pc/ts/_module/models/PageStatusModel.ts",
+    "./assets/pc/ts/_module/models/StatusModel.ts",
+    "./assets/pc/ts/_module/utils/ajax.ts",
+    "./assets/pc/ts/_module/views/AlbumDetailModalView.ts",
+    "./assets/pc/ts/_module/views/AlbumListView.ts",
+    "./assets/pc/ts/_module/views/BaseModalView.ts",
+    "./assets/pc/ts/_module/views/BasePageView.ts",
+    "./assets/pc/ts/_module/views/BaseView.ts",
+    "./assets/pc/ts/_module/views/FeedView.ts",
+    "./assets/pc/ts/_module/views/HeaderView.ts",
+    "./assets/pc/ts/_module/views/MypageView.ts",
+    "./assets/pc/ts/_module/views/SearchView.ts",
+    "./assets/pc/ts/home.ts",
+    "./assets/pc/ts/index.ts",
+    "./lib.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}

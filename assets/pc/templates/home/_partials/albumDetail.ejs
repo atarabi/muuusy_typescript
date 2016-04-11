@@ -1,0 +1,16 @@
+<div class="albumDetailModal jsModalWrapper">
+  <div class="albumDetail jsModalInner" data-collection-id="<% if(data){ %><%= data.collectionId %><% } %>">
+    <div class="modalCloseTrigger jsModalCloseTrigger"><a><i class="fa fa-times"></i></a></div>
+    <% if(data){ %>
+      <div class="detailImg">
+        <a href="<%= data.collectionViewUrl %>" target="_blank">
+          <img src="<%= data.artworkUrl400 %>" alt="<%= data.collectionName %>">
+        </a>
+      </div>
+      <p>ALBUM: <%= data.collectionName %></p>
+      <p>ARTIST: <%= data.artistName %></p>
+      <p>GENRE: <%= data.primaryGenreName %></p>
+      <div class="modalFavTrigger jsModalFavTrigger"><a><i class="fa fa-heart-o"></i></a></div>
+    <% } %>
+  </div>
+</div>

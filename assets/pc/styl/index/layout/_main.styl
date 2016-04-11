@@ -1,0 +1,57 @@
+/*
+ * main
+ */
+
+#indexView
+  #header
+    position: absolute
+    background-color: rgba(0,0,0,0)
+    h1
+      a
+        color: #fff
+    li
+      a
+        color: #fff
+      i
+        margin-right: 10px
+        font-size: 24px
+        vertical-align: middle
+        color: #fff
+  #mainVis
+    positioin: relative
+    width: 100%
+    min-width: 900px
+    height: 600px
+    background-image: url('../../../img/common/top/mainVis.jpg')
+    background-repeat: no-repeat
+    background-position: 50% 50%
+    background-size: cover
+    h2
+      Font-Family: $logoFont
+      position: absolute
+      top: 25%
+      left: 50%
+      margin-left: -240px
+      font-size: 60px
+      font-weight: 100
+      color: #fff
+
+  .chapter
+    display: table
+    min-height: 600px
+    padding: 20px
+    h3
+      display: table-cell
+      width: 50%
+      padding-right: 30px
+      font-size: 40px
+      vertical-align: middle
+    p
+      display: table-cell
+      width: 50%
+      font-size: 20px
+      vertical-align: middle
+    &.even
+      background-color: #efefef
+      h3
+        padding-left: 30px
