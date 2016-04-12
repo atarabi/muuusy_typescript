@@ -1,4 +1,4 @@
-# Gulp Template
+# TypeScript Sample
 
 ```
 npm install
@@ -6,11 +6,10 @@ npm install
 
 ##概要
 
-- gulpを使った中規模のアプリケーション。  
-- Babel、webpackを用いたモジュールを用いたES6での開発環境。  
+- TypeScript、Babel、webpackを用いた静的型付け+ES6の開発環境。  
 - Mocha, Power-Assert、Sinonを用いたTDD。
 
-※Babelを使用する場合はES5ベースになるので、IE9以上のモダンブラウザのみ対応。
+※Babelを利用する場合はES5ベースになるので、IE9以上のモダンブラウザのみ対応。
 
 
 ##HTML
@@ -135,6 +134,7 @@ gulp style
 
 ### 使用ツール
 
+- [TypeScript](https://www.typescriptlang.org/index.html)
 - [HTMLHint](http://htmlhint.com/)
 - [JSHint](http://jshint.com/)
 - [Stylus](https://learnboost.github.io/stylus/)
