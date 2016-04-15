@@ -50,14 +50,14 @@ class HeaderView extends BaseView<PageStatusType> {
       if (this._$searchText.val().length > 0) {
         this.movePage($(e.target), 'search');
         e.preventDefault();
-        let keyword = this._$searchText.val();
+        const keyword = this._$searchText.val();
         this._views.searchView.$el.trigger('onOpen', [keyword]);
       }
     });
     this._$searchText.on('keydown keyup', (e: JQueryEventObject) => {
       if (checkEnterKeypress(e) && $(e.target).val().length > 0) {
         this.movePage($(e.target), 'search');
-        let keyword = this._$searchText.val();
+        const keyword = this._$searchText.val();
         this._views.searchView.$el.trigger('onOpen', [keyword]);
         $(e.target).blur();
       }

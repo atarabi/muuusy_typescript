@@ -56,13 +56,13 @@ class BaseView<T> {
     this._deferredOptions.resolve();
   }
   protected render(): void {
-    let templateDataDefault = { data: {} };
+    const templateDataDefault = { data: {} };
     if (this._template(templateDataDefault) !== null) {
       this.remove();
       if (this.collection) {
         let tmpEls = [];
         _.each(this.collection, (model) => {
-          let el = this._template({ data: model.get });
+          const el = this._template({ data: model.get });
           tmpEls.push(el);
         });
         this._$el.append(tmpEls.join(''));

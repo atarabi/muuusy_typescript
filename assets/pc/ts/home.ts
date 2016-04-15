@@ -6,27 +6,27 @@ import FeedView = require('./_module/views/FeedView');
 import SearchView = require('./_module/views/SearchView');
 import MypageView = require('./_module/views/MypageView');
 
-const pageStatusModel = new PageStatusModel();
+const pageStatusModel: PageStatusModel = new PageStatusModel();
 
-const homeView = new FeedView({
+const homeView: FeedView = new FeedView({
   el: '#homeView',
   model: pageStatusModel,
   url: '/api/feed'
 });
 
-const mypageView = new MypageView({
+const mypageView: MypageView = new MypageView({
   el: '#mypageView',
   model: pageStatusModel,
   url: '/api/favs'
 });
 
-const searchView = new SearchView({
+const searchView: SearchView = new SearchView({
   el: '#searchView',
   model: pageStatusModel,
   url: 'https://itunes.apple.com/search'
 });
 
-const headerView = new HeaderView({
+const headerView: HeaderView = new HeaderView({
   el: '#header',
   model: pageStatusModel,
   views: {

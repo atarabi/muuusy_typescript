@@ -74,7 +74,7 @@ class BasePageView extends BaseView<PageStatusType> {
     this._checkLoading();
     this.resetList();
     $.ajax(this._ajaxConf).always((jqXHR, textStatus) => {
-      let status = ajax.getStatus(textStatus);
+      const status = ajax.getStatus(textStatus);
       (status === 'success') ? this._parseData(jqXHR) : this._networkErrorRender();
     });
   }

@@ -20,7 +20,7 @@ class SearchView extends BasePageView {
   };
   protected _setOptions(args?: PageViewArgsType): void {
     super._setOptions(args);
-    let reqData = {
+    const reqData = {
       term: '',
       country: 'US',
       lang: 'en_us',

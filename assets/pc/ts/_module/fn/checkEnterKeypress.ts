@@ -1,5 +1,5 @@
 // isEnterKeyPress
-const checkEnterKeypress = function (e: JQueryEventObject): boolean {
+const checkEnterKeypress = (e: JQueryEventObject): boolean => {
   let isConverting: boolean = false;
   if (e.type === 'keydown') {
     if (e.which === 229) {

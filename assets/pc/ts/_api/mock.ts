@@ -2,7 +2,7 @@ const $ = require('jquery');
 require('jquery-mockjax')($, window);
 
 // API Mock
-const setMock = () => {
+const setMock = (): void => {
   $.mockjax({
     url: '/api/feed',
     proxy: '/js/_api/feed.json',

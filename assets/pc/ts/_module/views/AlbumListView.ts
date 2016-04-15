@@ -46,7 +46,7 @@ class AlbumListView extends BaseView<PageStatusType> {
   }
   protected _setEvents(): void {
     this._$el.find('li > a').on('click', (e: JQueryEventObject) => {
-      let collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
+      const collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
       this._getModel(collectionId);
       this._deferredEvents.promise().done(() => {
         this.openAlbumDetail();
@@ -72,11 +72,11 @@ class AlbumListView extends BaseView<PageStatusType> {
   }
   private fixImgSize(): void {
     this._$el.children().each(() => {
-      let img = $(this).find('img');
-      let width = img.width();
-      let height = img.height();
+      const $img = $(this).find('img');
+      const width = $img.width();
+      const height = $img.height();
       if (height > width) {
-        img.addClass('fixHeight');
+        $img.addClass('fixHeight');
         // img.css({height: width});
       }
     });
