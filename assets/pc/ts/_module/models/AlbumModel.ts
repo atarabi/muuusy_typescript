@@ -2,7 +2,7 @@ import AlbumType = require('../interfaces/AlbumType');
 
 import BaseModel = require('./BaseModel');
 
-class PageStatusModel extends BaseModel<AlbumType> {
+class AlbumModel extends BaseModel<AlbumType> {
   constructor(args?: AlbumType) {
     super(args);
     if (!args) {
@@ -29,4 +29,4 @@ class PageStatusModel extends BaseModel<AlbumType> {
     this._attributes.releaseDate = args.releaseDate || this._attributes.releaseDate;
   }
 };
-export = PageStatusModel;
+export = AlbumModel;

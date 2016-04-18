@@ -1,7 +1,7 @@
-import PageStatusType = require('../interfaces/PageStatusType');
+import AppStatusType = require('../interfaces/AppStatusType');
 import AlbumListViewArgsType = require('../interfaces/AlbumListViewArgsType');
 
-import PageStatusModel = require('../models/PageStatusModel');
+import AppStatusModel = require('../models/AppStatusModel');
 import AlbumModel = require('../models/AlbumModel');
 import BaseView = require('../views/BaseView');
 import BasePageView = require('../views/BasePageView');
@@ -13,9 +13,9 @@ const albumListTmpl = require('../../../templates/home/_partials/albumList');
 const notFoundTmpl = require('../../../templates/home/_partials/notFound');
 
 
-class AlbumListView extends BaseView<PageStatusType> {
-  model: PageStatusModel;
-  collection: PageStatusModel[];
+class AlbumListView extends BaseView<AppStatusType> {
+  model: AppStatusModel;
+  collection: AppStatusModel[];
   parentView: BasePageView;
   private _albumDetailModalView: AlbumDetailModalView;
   private _albumDetailModalViewEl: string = this.parentView.el + ' .albumDetailModalView';

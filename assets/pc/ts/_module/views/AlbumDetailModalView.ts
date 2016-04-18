@@ -1,5 +1,5 @@
-import BaseViewArgsType = require('../interfaces/BaseViewArgsType');
 import AlbumType = require('../interfaces/AlbumType');
+import AlbumDetailModalViewArgsType = require('../interfaces/AlbumDetailModalViewArgsType');
 
 import StatusModel = require('../models/StatusModel');
 import AlbumModel = require('../models/AlbumModel');
@@ -14,10 +14,10 @@ class AlbumDetailModalView extends BaseModalView<AlbumType> {
   status: StatusModel = new StatusModel({ isLoading: true, isFav: false });
   private _$favIcon: JQuery;
   private _$modalFavTrigger: JQuery;
-  constructor(args: BaseViewArgsType<AlbumType>) {
+  constructor(args: AlbumDetailModalViewArgsType) {
     super(args);
   }
-  protected _setOptions(args?: BaseViewArgsType<AlbumType>): void {
+  protected _setOptions(args?: AlbumDetailModalViewArgsType): void {
     args.template = albumDetailTmpl;
     super._setOptions(args);
   }

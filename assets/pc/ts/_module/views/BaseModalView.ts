@@ -7,7 +7,7 @@ const $ = require('jquery');
  * @fileoverview モーダルウィンドウのベースとなるopne/close機能を持ったクラス。デフォルトでfadeIn/fadeOutするので調整可能。BaseViewを継承。
  *    対応ブラウザはPCのモダンブラウザ（IE8以上）
  */
-class BaseModalView<T> extends BaseView<T> {
+abstract class BaseModalView<T> extends BaseView<T> {
   private _$wrapper: JQuery;
   private _$inner: JQuery;
   private _$closeTrigger: JQuery;

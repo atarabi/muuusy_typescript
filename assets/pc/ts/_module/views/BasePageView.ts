@@ -1,10 +1,10 @@
-import AlbumType = require('../interfaces/AlbumType');
+import AppStatusType = require('../interfaces/AppStatusType');
 import PageViewArgsType = require('../interfaces/PageViewArgsType');
-import PageStatusType = require('../interfaces/PageStatusType');
+import AlbumType = require('../interfaces/AlbumType');
 
 import ajax = require('../utils/ajax');
 import AlbumModel = require('../models/AlbumModel');
-import PageStatusModel = require('../models/PageStatusModel');
+import AppStatusModel = require('../models/AppStatusModel');
 import StatusModel = require('../models/StatusModel');
 import BaseView = require('./BaseView');
 import AlbumListView = require('./AlbumListView');
@@ -13,9 +13,9 @@ const $ = require('jquery');
 const Masonry = require('../../libs/masonry.pkgd.js');
 
 
-class BasePageView extends BaseView<PageStatusType> {
-  model: PageStatusModel;
-  collection: PageStatusModel[];
+abstract class BasePageView extends BaseView<AppStatusType> {
+  model: AppStatusModel;
+  collection: AppStatusModel[];
   status: StatusModel = new StatusModel({ isLoading: false });
   protected _ajaxConf: {
     type: string;

@@ -11,7 +11,7 @@ const _ = require('lodash');
  * @fileoverview 全ての継承元となるView。init()から様々なメソッドを呼び、optionsでelにtemplateを自動でrenderする。modelやparentViewを設定可。init()とrender()は継承先で上書きしないように注意。
  *    対応ブラウザはモダンブラウザ（IE8以上）
  */
-class BaseView<T> {
+abstract class BaseView<T> {
   model: BaseModel<T>;
   collection: BaseModel<T>[];
   status: StatusModel = new StatusModel({ isLoading: true });
@@ -105,7 +105,8 @@ class BaseView<T> {
     this.$el.off();
   }
   resetModel(): void {
-    this.model = new BaseModel<T>();
+    let Model = class TempModel extends BaseModel<T>{};
+    this.model = new Model();
   }
   resetStatus(): void {
     this.status = new StatusModel({ isLoading: true });

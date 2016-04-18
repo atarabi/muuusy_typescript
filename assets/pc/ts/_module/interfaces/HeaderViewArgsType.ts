@@ -1,9 +1,9 @@
 import BaseViewArgsType = require('../interfaces/BaseViewArgsType');
-import PageStatusType = require('../interfaces/PageStatusType');
+import AppStatusType = require('../interfaces/AppStatusType');
 
 import BasePageView = require('../views/BasePageView');
 
-interface HeaderViewArgsType extends BaseViewArgsType<PageStatusType> {
+interface HeaderViewArgsType extends BaseViewArgsType<AppStatusType> {
   views: {
     homeView: BasePageView;
     mypageView: BasePageView;

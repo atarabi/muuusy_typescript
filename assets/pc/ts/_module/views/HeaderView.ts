@@ -1,7 +1,7 @@
+import AppStatusType = require('../interfaces/AppStatusType');
 import HeaderViewArgsType = require('../interfaces/HeaderViewArgsType');
-import PageStatusType = require('../interfaces/PageStatusType');
 
-import PageStatusModel = require('../models/PageStatusModel');
+import AppStatusModel = require('../models/AppStatusModel');
 import BaseView = require('../views/BaseView');
 import BasePageView = require('../views/BasePageView');
 
@@ -9,9 +9,9 @@ const $ = require('jquery');
 const checkEnterKeypress = require('../fn/checkEnterKeypress');
 
 // 記事情報やページ全体のView
-class HeaderView extends BaseView<PageStatusType> {
-  model: PageStatusModel;
-  collection: PageStatusModel[];
+class HeaderView extends BaseView<AppStatusType> {
+  model: AppStatusModel;
+  collection: AppStatusModel[];
   private _$searchText: JQuery;
   private _$homeTrigger: JQuery;
   private _$notificationTrigger: JQuery;

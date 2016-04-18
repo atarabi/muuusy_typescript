@@ -1,7 +1,7 @@
 import BaseViewArgsType = require('../interfaces/BaseViewArgsType');
-import PageStatusType = require('../interfaces/PageStatusType');
+import AppStatusType = require('../interfaces/AppStatusType');
 
-interface PageViewArgsType extends BaseViewArgsType<PageStatusType> {
+interface PageViewArgsType extends BaseViewArgsType<AppStatusType> {
   url: string;
 };
 

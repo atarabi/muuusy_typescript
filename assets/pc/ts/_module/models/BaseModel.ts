@@ -4,7 +4,7 @@
  *    対応ブラウザはモダンブラウザ（IE8以上）
  */
 
-class BaseModel<T> {
+abstract class BaseModel<T> {
   protected _attributes: T;
   constructor(args?: T) {
     if (args) { this._attributes = args; }
@@ -16,8 +16,7 @@ class BaseModel<T> {
     args = this.validate(args);
     this._attributes = args || this._attributes;
   }
-  protected validate(args: T) {
-    if (!args) { throw new Error('BaseModel.set arguments is empty.'); }
+  protected validate(args: T): T {
     return args;
   }
 }
