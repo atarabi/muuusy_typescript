@@ -1,15 +1,13 @@
-import BaseViewArgsType = require('../interfaces/BaseViewArgsType');
-
 import BaseModel = require('../models/BaseModel');
 import StatusModel = require('../models/StatusModel');
+
+import IBaseView = require('../views/IBaseView');
 
 const $ = jQuery = require('jquery');
 const _ = require('lodash');
 
 /**
- * BaseView Class Description v1.3.0
- * @fileoverview 全ての継承元となるView。init()から様々なメソッドを呼び、optionsでelにtemplateを自動でrenderする。modelやparentViewを設定可。init()とrender()は継承先で上書きしないように注意。
- *    対応ブラウザはモダンブラウザ（IE8以上）
+ * BaseView Class Description v2.0.0
  */
 abstract class BaseView<T> {
   model: BaseModel<T>;
@@ -21,7 +19,7 @@ abstract class BaseView<T> {
   private _deferredOptions: JQueryDeferred<void> = jQuery.Deferred<void>();
   private _deferredRender: JQueryDeferred<void> = jQuery.Deferred<void>();
   private _deferredSetEl: JQueryDeferred<void> = jQuery.Deferred<void>();
-  constructor(args: BaseViewArgsType<T>) {
+  constructor(args: IBaseView<T>) {
     if (this._el) { this._$el = $(this._el); }
     if (args) {
       if (args.el) {
@@ -46,7 +44,7 @@ abstract class BaseView<T> {
       this.resetStatus();
     });
   }
-  protected _setOptions(args?: BaseViewArgsType<T>): void {
+  protected _setOptions(args?: IBaseView<T>): void {
     if (args.collection) {
       this.collection = args.collection;
     }else if (args.model) {

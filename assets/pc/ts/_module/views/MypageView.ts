@@ -1,4 +1,5 @@
-import BasePageView = require('./BasePageView');
+import BasePageView = require('../views/BasePageView');
+
 import setMock = require('../../_api/mock');
 
 class MypageView extends BasePageView {

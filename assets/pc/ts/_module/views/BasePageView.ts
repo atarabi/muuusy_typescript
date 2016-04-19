@@ -1,19 +1,19 @@
-import AppStatusType = require('../interfaces/AppStatusType');
-import PageViewArgsType = require('../interfaces/PageViewArgsType');
-import AlbumType = require('../interfaces/AlbumType');
-
-import ajax = require('../utils/ajax');
+import IAppStatus = require('../models/IAppStatus');
+import IAlbum = require('../models/IAlbum');
 import AlbumModel = require('../models/AlbumModel');
 import AppStatusModel = require('../models/AppStatusModel');
 import StatusModel = require('../models/StatusModel');
-import BaseView = require('./BaseView');
-import AlbumListView = require('./AlbumListView');
 
 const $ = require('jquery');
+import IPageView = require('../views/IPageView');
+import BaseView = require('../views/BaseView');
+import AlbumListView = require('../views/AlbumListView');
+
+const ajax = require('../utils/ajax');
 const Masonry = require('../../libs/masonry.pkgd.js');
 
 
-abstract class BasePageView extends BaseView<AppStatusType> {
+abstract class BasePageView extends BaseView<IAppStatus> {
   model: AppStatusModel;
   collection: AppStatusModel[];
   status: StatusModel = new StatusModel({ isLoading: false });
@@ -30,10 +30,10 @@ abstract class BasePageView extends BaseView<AppStatusType> {
   private _albumlistEl: string = '.albumList';
   private _msnry: IMasonry;
   private _$masonryBox: JQuery;
-  constructor(args: PageViewArgsType) {
+  constructor(args: IPageView) {
     super(args);
   }
-  protected _setOptions(args?: PageViewArgsType): void {
+  protected _setOptions(args?: IPageView): void {
     this._ajaxConf = {
       type: 'get',
       url: args.url,
@@ -83,7 +83,7 @@ abstract class BasePageView extends BaseView<AppStatusType> {
   }
   protected _albumListViewRender(datas): void {
     let collection = [];
-    _.each(datas, (album: AlbumType) => {
+    _.each(datas, (album: IAlbum) => {
       collection.push(new AlbumModel(album));
     });
     this._albumListView = new AlbumListView({

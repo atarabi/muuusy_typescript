@@ -1,23 +1,22 @@
-import AlbumType = require('../interfaces/AlbumType');
-import AlbumDetailModalViewArgsType = require('../interfaces/AlbumDetailModalViewArgsType');
-
+import IAlbum = require('../models/IAlbum');
 import StatusModel = require('../models/StatusModel');
 import AlbumModel = require('../models/AlbumModel');
-import BaseModalView = require('./BaseModalView');
+
+import IAlbumDetailModalView = require('../views/IAlbumDetailModalView');
+import BaseModalView = require('../views/BaseModalView');
 
 const albumDetailTmpl = require('../../../templates/home/_partials/albumDetail.ejs');
 
-// AlbumDetailModalView
-class AlbumDetailModalView extends BaseModalView<AlbumType> {
+class AlbumDetailModalView extends BaseModalView<IAlbum> {
   model: AlbumModel;
   collection: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: true, isFav: false });
   private _$favIcon: JQuery;
   private _$modalFavTrigger: JQuery;
-  constructor(args: AlbumDetailModalViewArgsType) {
+  constructor(args: IAlbumDetailModalView) {
     super(args);
   }
-  protected _setOptions(args?: AlbumDetailModalViewArgsType): void {
+  protected _setOptions(args?: IAlbumDetailModalView): void {
     args.template = albumDetailTmpl;
     super._setOptions(args);
   }

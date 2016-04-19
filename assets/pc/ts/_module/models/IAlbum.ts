@@ -1,4 +1,4 @@
- interface AlbumType {
+ interface IAlbum {
    artistId: string;
    artistName: string;
    artworkUrl400: string;
@@ -9,4 +9,4 @@
    releaseDate: string;
 };
 
-export = AlbumType;
+export = IAlbum;

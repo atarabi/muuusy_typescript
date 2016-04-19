@@ -1,17 +1,15 @@
-import BaseView = require('./BaseView');
+import BaseView = require('../views/BaseView');
 
 const $ = require('jquery');
 
 /**
- * BaseModalView Class Description v1.3.0
- * @fileoverview モーダルウィンドウのベースとなるopne/close機能を持ったクラス。デフォルトでfadeIn/fadeOutするので調整可能。BaseViewを継承。
- *    対応ブラウザはPCのモダンブラウザ（IE8以上）
+ * BaseModalView Class Description v2.0.0
  */
 abstract class BaseModalView<T> extends BaseView<T> {
   private _$wrapper: JQuery;
   private _$inner: JQuery;
   private _$closeTrigger: JQuery;
-  private _fadeSpeed = 300; // fadeしたくない場合は0
+  private _fadeSpeed = 300;
   protected _setEl(): void {
     super._setEl();
     this._$wrapper = this._$el.find('.jsModalWrapper');
@@ -20,11 +18,9 @@ abstract class BaseModalView<T> extends BaseView<T> {
   }
   protected _setEvents(): void {
     this._$inner.on('click', (e: JQueryEventObject) => {
-      // $elイベントのバブリングを停止
       e.stopPropagation();
     });
     this._$el.on('click', (e: JQueryEventObject) => {
-      // 背景を押したら閉じるイベントハンドラ
       e.preventDefault();
       this.close();
     });

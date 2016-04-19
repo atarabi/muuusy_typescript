@@ -1,11 +1,11 @@
-import AppStatusType = require('../interfaces/AppStatusType');
-import AlbumListViewArgsType = require('../interfaces/AlbumListViewArgsType');
-
+import IAppStatus = require('../models/IAppStatus');
 import AppStatusModel = require('../models/AppStatusModel');
 import AlbumModel = require('../models/AlbumModel');
+
+import IAlbumListView = require('../views/IAlbumListView');
 import BaseView = require('../views/BaseView');
 import BasePageView = require('../views/BasePageView');
-import AlbumDetailModalView = require('./AlbumDetailModalView');
+import AlbumDetailModalView = require('../views/AlbumDetailModalView');
 
 const $ = jQuery = require('jquery');
 const imagesLoaded = require('imagesloaded');
@@ -13,7 +13,7 @@ const albumListTmpl = require('../../../templates/home/_partials/albumList');
 const notFoundTmpl = require('../../../templates/home/_partials/notFound');
 
 
-class AlbumListView extends BaseView<AppStatusType> {
+class AlbumListView extends BaseView<IAppStatus> {
   model: AppStatusModel;
   collection: AppStatusModel[];
   parentView: BasePageView;
@@ -22,10 +22,10 @@ class AlbumListView extends BaseView<AppStatusType> {
   private _modalModel: AlbumModel;
   private _deferredEvents: JQueryDeferred<void> = jQuery.Deferred<void>();
   private _masonryClass: string = '.jsMasonryBox';
-  constructor(args: AlbumListViewArgsType) {
+  constructor(args: IAlbumListView) {
     super(args);
   }
-  protected _setOptions(args?: AlbumListViewArgsType): void {
+  protected _setOptions(args?: IAlbumListView): void {
     args.template = albumListTmpl;
     this.parentView = args.parentView;
     super._setOptions(args);

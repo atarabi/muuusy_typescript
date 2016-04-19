@@ -1,8 +1,6 @@
-import PageViewArgsType = require('../interfaces/PageViewArgsType');
+import IPageView = require('../views/IPageView');
+import BasePageView = require('../views/BasePageView');
 
-import BasePageView = require('./BasePageView');
-
-// 記事情報やページ全体のView
 class SearchView extends BasePageView {
   protected _ajaxConf: {
     type: string;
@@ -18,7 +16,7 @@ class SearchView extends BasePageView {
     jsonpCallback: string;
     dataType: string;
   };
-  protected _setOptions(args?: PageViewArgsType): void {
+  protected _setOptions(args?: IPageView): void {
     super._setOptions(args);
     const reqData = {
       term: '',
