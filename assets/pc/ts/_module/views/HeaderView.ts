@@ -1,16 +1,20 @@
-import IAppStatus = require('../models/IAppStatus');
-import AppStatusModel = require('../models/AppStatusModel');
+import * as $ from 'jquery';
 
-import IHeaderView = require('../views/IHeaderView');
-import BaseView = require('../views/BaseView');
-import BasePageView = require('../views/BasePageView');
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
+import AppStatusModel from '../models/AppStatusModel';
+import AlbumModel from '../models/AlbumModel';
 
-const $ = require('jquery');
-const checkEnterKeypress = require('../fn/checkEnterKeypress');
+import IHeaderView from '../views/IHeaderView';
+import BaseView from '../views/BaseView';
+import BasePageView from '../views/BasePageView';
 
-class HeaderView extends BaseView<IAppStatus> {
+import checkEnterKeypress from '../fn/checkEnterKeypress';
+
+
+export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
-  collection: AppStatusModel[];
+  collection: AlbumModel[];
   private _$searchText: JQuery;
   private _$homeTrigger: JQuery;
   private _$notificationTrigger: JQuery;
@@ -49,15 +53,15 @@ class HeaderView extends BaseView<IAppStatus> {
       if (this._$searchText.val().length > 0) {
         this.movePage($(e.target), 'search');
         e.preventDefault();
-        const keyword = this._$searchText.val();
-        this._views.searchView.$el.trigger('onOpen', [keyword]);
+        const term = this._$searchText.val();
+        this._views.searchView.$el.trigger('onOpen', [term]);
       }
     });
     this._$searchText.on('keydown keyup', (e: JQueryEventObject) => {
       if (checkEnterKeypress(e) && $(e.target).val().length > 0) {
         this.movePage($(e.target), 'search');
-        const keyword = this._$searchText.val();
-        this._views.searchView.$el.trigger('onOpen', [keyword]);
+        const term = this._$searchText.val();
+        this._views.searchView.$el.trigger('onOpen', [term]);
         $(e.target).blur();
       }
     });
@@ -80,5 +84,3 @@ class HeaderView extends BaseView<IAppStatus> {
     this._$searchText.off();
   }
 }
-
-export = HeaderView;

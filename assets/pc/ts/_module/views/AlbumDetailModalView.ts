@@ -1,16 +1,19 @@
-import IAlbum = require('../models/IAlbum');
-import StatusModel = require('../models/StatusModel');
-import AlbumModel = require('../models/AlbumModel');
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
+import AppStatusModel from '../models/AppStatusModel';
+import StatusModel from '../models/StatusModel';
+import AlbumModel from '../models/AlbumModel';
 
-import IAlbumDetailModalView = require('../views/IAlbumDetailModalView');
-import BaseModalView = require('../views/BaseModalView');
+import IAlbumDetailModalView from '../views/IAlbumDetailModalView';
+import BaseModalView from '../views/BaseModalView';
 
 const albumDetailTmpl = require('../../../templates/home/_partials/albumDetail.ejs');
 
-class AlbumDetailModalView extends BaseModalView<IAlbum> {
+
+export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> {
   model: AlbumModel;
   collection: AlbumModel[];
-  status: StatusModel = new StatusModel({ isLoading: true, isFav: false });
+  status: StatusModel = new StatusModel({ isLoading: false, isFav: false });
   private _$favIcon: JQuery;
   private _$modalFavTrigger: JQuery;
   constructor(args: IAlbumDetailModalView) {
@@ -35,7 +38,7 @@ class AlbumDetailModalView extends BaseModalView<IAlbum> {
     });
   };
   protected _toggleFav(): void {
-    this.status.get.isFav = (this._$favIcon.hasClass('fa-heart')) ? true : false;
+    this.status.get.isFav = (!this.status.get.isFav) ? true : false;
     this._checkFavStatus();
     this.status.get.isLoading = false;
   };
@@ -57,5 +60,3 @@ class AlbumDetailModalView extends BaseModalView<IAlbum> {
     });
   }
 }
-
-export = AlbumDetailModalView;

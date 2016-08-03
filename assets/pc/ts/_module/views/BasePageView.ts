@@ -1,21 +1,23 @@
+import * as $ from 'jquery';
 const Masonry = require('masonry-layout');
-const $ = require('jquery');
 
-import IAppStatus = require('../models/IAppStatus');
-import IAlbum = require('../models/IAlbum');
-import AlbumModel = require('../models/AlbumModel');
-import AppStatusModel = require('../models/AppStatusModel');
-import StatusModel = require('../models/StatusModel');
-import IPageView = require('../views/IPageView');
-import BaseView = require('../views/BaseView');
-import AlbumListView = require('../views/AlbumListView');
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
+import AppStatusModel from '../models/AppStatusModel';
+import AlbumModel from '../models/AlbumModel';
+import StatusModel from '../models/StatusModel';
 
-const ajax = require('../utils/ajax');
+import IPageView from '../views/IPageView';
+import BaseView from '../views/BaseView';
+import AlbumListView from '../views/AlbumListView';
+
+import ajax from '../utils/ajax';
 
 
-abstract class BasePageView extends BaseView<IAppStatus> {
+abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
-  collection: AppStatusModel[];
+  collection: AlbumModel[];
+  favs: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: false });
   protected _ajaxConf: {
     type: string;
@@ -75,17 +77,41 @@ abstract class BasePageView extends BaseView<IAppStatus> {
     this.resetList();
     $.ajax(this._ajaxConf).always((jqXHR, textStatus) => {
       const status = ajax.getStatus(textStatus);
-      (status === 'success') ? this._parseData(jqXHR) : this._networkErrorRender();
+      (status === 'success') ? this._getFavs(jqXHR) : this._networkErrorRender();
     });
+  }
+  protected _getFavs(albums): void {
+    $.ajax({
+      type: 'get',
+      url: '/api/favs',
+      dataType: 'json'
+    }).always((jqXHR, textStatus) => {
+      const status = ajax.getStatus(textStatus);
+      if (status === 'success') {
+        albums = this._checkFav(albums, jqXHR);
+        this._parseData(albums);
+      } else {
+        this._networkErrorRender();
+      }
+    });
+  }
+  protected _checkFav(albums, compareAlbums) {
+    albums = (albums.results) ? albums.results : albums;
+    albums.forEach((album) => {
+      album.isFav = false;
+      compareAlbums.forEach((compareAlbum) => {
+        if (album && album.collectionId.toString() === compareAlbum.collectionId.toString()) {
+          album.isFav = true;
+        }
+      });
+    });
+    return albums;
   }
   protected _parseData(datas): void {
     this._albumListViewRender(datas);
   }
   protected _albumListViewRender(datas): void {
-    let collection = [];
-    _.each(datas, (album: IAlbum) => {
-      collection.push(new AlbumModel(album));
-    });
+    let collection = datas.map((album: IAlbum) => { return new AlbumModel(album); });
     this._albumListView = new AlbumListView({
       el: this.el + ' ' + this._albumlistEl,
       model: this.model,
@@ -118,4 +144,4 @@ abstract class BasePageView extends BaseView<IAppStatus> {
   }
 }
 
-export = BasePageView;
+export default BasePageView;

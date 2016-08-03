@@ -1,12 +1,12 @@
- interface IAlbum {
-   artistId: string;
-   artistName: string;
-   artworkUrl400: string;
-   collectionId: string;
-   collectionName: string;
-   collectionViewUrl: string;
-   primaryGenreName: string;
-   releaseDate: string;
+interface IAlbum {
+  artistId: string;
+  artistName: string;
+  artworkUrl400: string;
+  collectionId: string;
+  collectionName: string;
+  collectionViewUrl: string;
+  primaryGenreName: string;
+  releaseDate: string;
 };
 
-export = IAlbum;
+export default IAlbum;

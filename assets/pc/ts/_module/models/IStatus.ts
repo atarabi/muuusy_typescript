@@ -3,4 +3,4 @@ interface StatusType {
   isFav?: boolean;
 };
 
-export = StatusType;
+export default StatusType;

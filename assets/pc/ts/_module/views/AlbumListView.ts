@@ -1,26 +1,27 @@
-import IAppStatus = require('../models/IAppStatus');
-import AppStatusModel = require('../models/AppStatusModel');
-import AlbumModel = require('../models/AlbumModel');
-
-import IAlbumListView = require('../views/IAlbumListView');
-import BaseView = require('../views/BaseView');
-import BasePageView = require('../views/BasePageView');
-import AlbumDetailModalView = require('../views/AlbumDetailModalView');
-
-const $ = jQuery = require('jquery');
+import * as $ from 'jquery';
 const imagesLoaded = require('imagesloaded');
+
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
+import AppStatusModel  from '../models/AppStatusModel';
+import AlbumModel  from '../models/AlbumModel';
+
+import IAlbumListView from '../views/IAlbumListView';
+import BaseView from '../views/BaseView';
+import BasePageView from '../views/BasePageView';
+import AlbumDetailModalView from '../views/AlbumDetailModalView';
+
 const albumListTmpl = require('../../../templates/home/_partials/albumList');
 const notFoundTmpl = require('../../../templates/home/_partials/notFound');
 
 
-class AlbumListView extends BaseView<IAppStatus> {
+export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
-  collection: AppStatusModel[];
+  collection: AlbumModel[];
   parentView: BasePageView;
   private _albumDetailModalView: AlbumDetailModalView;
   private _albumDetailModalViewEl: string = this.parentView.el + ' .albumDetailModalView';
   private _modalModel: AlbumModel;
-  private _deferredEvents: JQueryDeferred<void> = jQuery.Deferred<void>();
   private _masonryClass: string = '.jsMasonryBox';
   constructor(args: IAlbumListView) {
     super(args);
@@ -47,18 +48,13 @@ class AlbumListView extends BaseView<IAppStatus> {
   protected _setEvents(): void {
     this._$el.find('li > a').on('click', (e: JQueryEventObject) => {
       const collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
-      this._getModel(collectionId);
-      this._deferredEvents.promise().done(() => {
-        this.openAlbumDetail();
-      });
+      this._modalModel = this._getModel(collectionId);
+      this.openAlbumDetail();
     });
   }
-  protected _getModel(collectionId: string): void {
-    _.each(this.collection, (model: AlbumModel) => {
-      if (model.get.collectionId === collectionId) {
-        this._modalModel = model;
-        this._deferredEvents.resolve();
-      }
+  protected _getModel(collectionId: string): AlbumModel {
+    return this.collection.find((model: AlbumModel) => {
+      return model.get.collectionId === collectionId;
     });
   }
   private onImgesLoaded(): void {
@@ -93,5 +89,3 @@ class AlbumListView extends BaseView<IAppStatus> {
     this._$el.find('li > a').off();
   }
 }
-
-export = AlbumListView;

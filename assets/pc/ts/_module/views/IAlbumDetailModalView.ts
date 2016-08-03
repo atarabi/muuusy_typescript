@@ -1,7 +1,9 @@
-import IAlbum = require('../models/IAlbum');
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
 
-import IBaseView = require('../views/IBaseView');
+import IBaseView from '../views/IBaseView';
 
-interface IAlbumDetailModalView extends IBaseView<IAlbum> {};
 
-export = IAlbumDetailModalView;
+interface IAlbumDetailModalView extends IBaseView<IAlbum, IAlbum> {};
+
+export default IAlbumDetailModalView;

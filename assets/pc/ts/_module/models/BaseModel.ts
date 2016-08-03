@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 /**
  * BaseModel Class Description v2.0.0
  */
@@ -19,4 +21,4 @@ abstract class BaseModel<T> {
   }
 }
 
-export = BaseModel;
+export default BaseModel;

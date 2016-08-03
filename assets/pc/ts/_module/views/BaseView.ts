@@ -1,25 +1,22 @@
-import BaseModel = require('../models/BaseModel');
-import StatusModel = require('../models/StatusModel');
+import * as $ from 'jquery';
 
-import IBaseView = require('../views/IBaseView');
+import BaseModel from '../models/BaseModel';
+import StatusModel from '../models/StatusModel';
 
-const $ = jQuery = require('jquery');
-const _ = require('lodash');
+import IBaseView from '../views/IBaseView';
+
 
 /**
  * BaseView Class Description v2.0.0
  */
-abstract class BaseView<T> {
+abstract class BaseView<T, T2> {
   model: BaseModel<T>;
-  collection: BaseModel<T>[];
+  collection: BaseModel<T2>[];
   status: StatusModel = new StatusModel({ isLoading: true });
   protected _el: string;
   protected _$el: JQuery;
   protected _template(args?: { data: {} }): string { return null; };
-  private _deferredOptions: JQueryDeferred<void> = jQuery.Deferred<void>();
-  private _deferredRender: JQueryDeferred<void> = jQuery.Deferred<void>();
-  private _deferredSetEl: JQueryDeferred<void> = jQuery.Deferred<void>();
-  constructor(args: IBaseView<T>) {
+  constructor(args: IBaseView<T, T2>) {
     if (this._el) { this._$el = $(this._el); }
     if (args) {
       if (args.el) {
@@ -27,41 +24,30 @@ abstract class BaseView<T> {
         this._$el = $(args.el);
       }
       this._setOptions(args);
-    }else {
-      this._deferredOptions.resolve();
     }
-    this._deferredOptions.promise().then(() => {
-      this.render();
-      return this._deferredRender.promise();
-    }).then(() => {
-      this._setEl();
-      return this._deferredSetEl.promise();
-    }).then(() => {
-      this._setEvents();
-      this._setCustomEvents();
-      this._setFn();
-      this.resetModel();
-      this.resetStatus();
-    });
+    this.render();
+    this._setEl();
+    this._setEvents();
+    this._setCustomEvents();
+    this._setFn();
+    this.resetModel();
+    this.resetStatus();
   }
-  protected _setOptions(args?: IBaseView<T>): void {
+  protected _setOptions(args?: IBaseView<T, T2>): void {
     if (args.collection) {
       this.collection = args.collection;
     }else if (args.model) {
       this.model = args.model;
     }
     if (args.template) { this._template = args.template; }
-    this._deferredOptions.resolve();
   }
   protected render(): void {
     const templateDataDefault = { data: {} };
     if (this._template(templateDataDefault) !== null) {
       this.remove();
       if (this.collection) {
-        let tmpEls = [];
-        _.each(this.collection, (model) => {
-          const el = this._template({ data: model.get });
-          tmpEls.push(el);
+        let tmpEls = this.collection.map((model) => {
+          return this._template({ data: model.get });
         });
         this._$el.append(tmpEls.join(''));
       }else if (this.model) {
@@ -70,10 +56,9 @@ abstract class BaseView<T> {
         this._$el.append(this._template(templateDataDefault));
       }
     }
-    this._deferredRender.resolve();
   }
   protected _setEl(): void {
-    this._deferredSetEl.resolve();
+    return;
   }
   protected _setEvents(): void {
     return;
@@ -114,4 +99,4 @@ abstract class BaseView<T> {
   }
 }
 
-export = BaseView;
+export default BaseView;

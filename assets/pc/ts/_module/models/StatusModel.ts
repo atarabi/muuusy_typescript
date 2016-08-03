@@ -1,6 +1,4 @@
-import IStatus = require('../models/IStatus');
-import BaseModel = require('../models/BaseModel');
+import IStatus from '../models/IStatus';
+import BaseModel from '../models/BaseModel';
 
-class StatusModel extends BaseModel<IStatus> {};
-
-export = StatusModel;
+export default class StatusModel extends BaseModel<IStatus> {};

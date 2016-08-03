@@ -1,7 +1,8 @@
-import IPageView = require('../views/IPageView');
-import BasePageView = require('../views/BasePageView');
+import IPageView from '../views/IPageView';
+import BasePageView from '../views/BasePageView';
 
-class SearchView extends BasePageView {
+
+export default class SearchView extends BasePageView {
   protected _ajaxConf: {
     type: string;
     url: string;
@@ -44,13 +45,10 @@ class SearchView extends BasePageView {
       this._setMasonry();
     });
   }
-  protected _parseData(datas): void {
-    let collection = datas.results;
-    _.each(collection, (album) => {
+  protected _parseData(collection): void {
+    collection.forEach((album) => {
       album.artworkUrl400 = album.artworkUrl100.replace('100x100bb', '400x400bb');
     });
     super._parseData(collection);
   }
 }
-
-export = SearchView;

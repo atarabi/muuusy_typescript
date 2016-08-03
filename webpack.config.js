@@ -35,11 +35,6 @@ module.exports = {
     ),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.ProvidePlugin({ //jqueryはグローバルに出す設定。これでrequireせず使えるのでjqueryプラグインもそのまま動く。
-      _: "lodash",
-      jQuery: "jquery",
-      $: "jquery",
-      jquery: "jquery"
-    })
+    new webpack.ProvidePlugin({})
   ]
 };

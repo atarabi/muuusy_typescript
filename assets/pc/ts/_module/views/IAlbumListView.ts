@@ -1,10 +1,12 @@
-import IAppStatus = require('../models/IAppStatus');
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
 
-import IBaseView = require('../views/IBaseView');
-import BasePageView = require('../views/BasePageView');
+import IBaseView from '../views/IBaseView';
+import BasePageView from '../views/BasePageView';
 
-interface IAlbumListView extends IBaseView<IAppStatus> {
+
+interface IAlbumListView extends IBaseView<IAppStatus, IAlbum> {
   parentView: BasePageView;
 };
 
-export = IAlbumListView;
+export default IAlbumListView;

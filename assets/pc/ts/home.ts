@@ -1,10 +1,10 @@
 /// <reference path="../../../lib.d.ts" />
 
-import AppStatusModel = require('./_module/models/AppStatusModel');
-import HeaderView = require('./_module/views/HeaderView');
-import FeedView = require('./_module/views/FeedView');
-import SearchView = require('./_module/views/SearchView');
-import MypageView = require('./_module/views/MypageView');
+import AppStatusModel from './_module/models/AppStatusModel';
+import HeaderView from './_module/views/HeaderView';
+import FeedView from './_module/views/FeedView';
+import SearchView from './_module/views/SearchView';
+import MypageView from './_module/views/MypageView';
 
 const appStatusModel: AppStatusModel = new AppStatusModel();
 

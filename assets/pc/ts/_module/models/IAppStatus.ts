@@ -3,4 +3,4 @@ interface IAppStatus {
   appStatus?: string;
 };
 
-export = IAppStatus;
+export default  IAppStatus;
