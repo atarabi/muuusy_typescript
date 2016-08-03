@@ -51,15 +51,15 @@ export default class HeaderView extends BaseView<IAppStatus> {
       if (this._$searchText.val().length > 0) {
         this.movePage($(e.target), 'search');
         e.preventDefault();
-        const keyword = this._$searchText.val();
-        this._views.searchView.$el.trigger('onOpen', [keyword]);
+        const term = this._$searchText.val();
+        this._views.searchView.$el.trigger('onOpen', [term]);
       }
     });
     this._$searchText.on('keydown keyup', (e: JQueryEventObject) => {
       if (checkEnterKeypress(e) && $(e.target).val().length > 0) {
         this.movePage($(e.target), 'search');
-        const keyword = this._$searchText.val();
-        this._views.searchView.$el.trigger('onOpen', [keyword]);
+        const term = this._$searchText.val();
+        this._views.searchView.$el.trigger('onOpen', [term]);
         $(e.target).blur();
       }
     });

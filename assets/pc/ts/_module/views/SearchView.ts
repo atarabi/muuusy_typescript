@@ -32,11 +32,9 @@ export default class SearchView extends BasePageView {
   }
   protected _setCustomEvents(): void {
     this._$el.on('onOpen', (e: JQueryEventObject, searchWord: string) => {
-      if (this.status.get.isLoading === false ) {
-        this.model.set = { searchWord: searchWord };
-        this._ajaxConf.data.term = searchWord;
-        this._getData();
-      }
+      this.model.set = { searchWord: searchWord };
+      this._ajaxConf.data.term = searchWord;
+      this._getData();
     });
     this._$el.on('loadingFinish', () => {
       this.status.get.isLoading = false;
