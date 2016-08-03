@@ -1,6 +1,6 @@
 import * as $ from 'jquery';
 import * as _ from 'lodash';
-import imagesLoaded = require('imagesloaded');
+const imagesLoaded = require('imagesloaded');
 
 import IAppStatus from '../models/IAppStatus';
 import AppStatusModel  from '../models/AppStatusModel';
