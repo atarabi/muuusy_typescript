@@ -1,7 +1,9 @@
 import * as $ from 'jquery';
 
 import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
 import AppStatusModel from '../models/AppStatusModel';
+import AlbumModel from '../models/AlbumModel';
 
 import IHeaderView from '../views/IHeaderView';
 import BaseView from '../views/BaseView';
@@ -10,9 +12,9 @@ import BasePageView from '../views/BasePageView';
 import checkEnterKeypress from '../fn/checkEnterKeypress';
 
 
-export default class HeaderView extends BaseView<IAppStatus> {
+export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
-  collection: AppStatusModel[];
+  collection: AlbumModel[];
   private _$searchText: JQuery;
   private _$homeTrigger: JQuery;
   private _$notificationTrigger: JQuery;

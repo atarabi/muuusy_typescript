@@ -1,8 +1,8 @@
 import * as $ from 'jquery';
-import * as _ from 'lodash';
 const imagesLoaded = require('imagesloaded');
 
 import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
 import AppStatusModel  from '../models/AppStatusModel';
 import AlbumModel  from '../models/AlbumModel';
 
@@ -15,14 +15,13 @@ const albumListTmpl = require('../../../templates/home/_partials/albumList');
 const notFoundTmpl = require('../../../templates/home/_partials/notFound');
 
 
-export default class AlbumListView extends BaseView<IAppStatus> {
+export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
-  collection: AppStatusModel[];
+  collection: AlbumModel[];
   parentView: BasePageView;
   private _albumDetailModalView: AlbumDetailModalView;
   private _albumDetailModalViewEl: string = this.parentView.el + ' .albumDetailModalView';
   private _modalModel: AlbumModel;
-  private _deferredEvents: JQueryDeferred<void> = $.Deferred<void>();
   private _masonryClass: string = '.jsMasonryBox';
   constructor(args: IAlbumListView) {
     super(args);
@@ -49,32 +48,15 @@ export default class AlbumListView extends BaseView<IAppStatus> {
   protected _setEvents(): void {
     this._$el.find('li > a').on('click', (e: JQueryEventObject) => {
       const collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
-      this._getModel(collectionId);
-      this._deferredEvents.promise().done(() => {
-        this.openAlbumDetail();
-      });
+      this._modalModel = this._getModel(collectionId);
+      this.openAlbumDetail();
     });
   }
-  protected _getModel(collectionId: string): void {
-    _.each(this.collection, (model: AlbumModel) => {
-      if (model.get.collectionId === collectionId) {
-        this._modalModel = model;
-        this._deferredEvents.resolve();
-      }
+  protected _getModel(collectionId: string): AlbumModel {
+    return this.collection.find((model: AlbumModel) => {
+      return model.get.collectionId === collectionId;
     });
   }
-  // protected _setEvents(): void {
-  //   this._$el.find('li > a').on('click', (e: JQueryEventObject) => {
-  //     const collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
-  //     this._modalModel = this._getModel(collectionId);
-  //     this.openAlbumDetail();
-  //   });
-  // }
-  // protected _getModel(collectionId: string): AlbumModel {
-  //   return _.find(this.collection, (model: AlbumModel) => {
-  //     return model.get.collectionId === collectionId;
-  //   });
-  // }
   private onImgesLoaded(): void {
     this.show();
     this.fixImgSize();

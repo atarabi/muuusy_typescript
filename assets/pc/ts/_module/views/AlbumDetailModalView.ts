@@ -1,4 +1,6 @@
+import IAppStatus from '../models/IAppStatus';
 import IAlbum from '../models/IAlbum';
+import AppStatusModel from '../models/AppStatusModel';
 import StatusModel from '../models/StatusModel';
 import AlbumModel from '../models/AlbumModel';
 
@@ -7,7 +9,7 @@ import BaseModalView from '../views/BaseModalView';
 
 const albumDetailTmpl = require('../../../templates/home/_partials/albumDetail.ejs');
 
-export default class AlbumDetailModalView extends BaseModalView<IAlbum> {
+export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> {
   model: AlbumModel;
   collection: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: true, isFav: false });

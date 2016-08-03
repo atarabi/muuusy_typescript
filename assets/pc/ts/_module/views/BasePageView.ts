@@ -3,8 +3,8 @@ const Masonry = require('masonry-layout');
 
 import IAppStatus from '../models/IAppStatus';
 import IAlbum from '../models/IAlbum';
-import AlbumModel from '../models/AlbumModel';
 import AppStatusModel from '../models/AppStatusModel';
+import AlbumModel from '../models/AlbumModel';
 import StatusModel from '../models/StatusModel';
 
 import IPageView from '../views/IPageView';
@@ -14,9 +14,9 @@ import AlbumListView from '../views/AlbumListView';
 import ajax from '../utils/ajax';
 
 
-abstract class BasePageView extends BaseView<IAppStatus> {
+abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
-  collection: AppStatusModel[];
+  collection: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: false });
   protected _ajaxConf: {
     type: string;

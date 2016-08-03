@@ -9,17 +9,14 @@ import IBaseView from '../views/IBaseView';
 /**
  * BaseView Class Description v2.0.0
  */
-abstract class BaseView<T> {
+abstract class BaseView<T, T2> {
   model: BaseModel<T>;
-  collection: BaseModel<T>[];
+  collection: BaseModel<T2>[];
   status: StatusModel = new StatusModel({ isLoading: true });
   protected _el: string;
   protected _$el: JQuery;
   protected _template(args?: { data: {} }): string { return null; };
-  private _deferredOptions: JQueryDeferred<void> = $.Deferred<void>();
-  private _deferredRender: JQueryDeferred<void> = $.Deferred<void>();
-  private _deferredSetEl: JQueryDeferred<void> = $.Deferred<void>();
-  constructor(args: IBaseView<T>) {
+  constructor(args: IBaseView<T, T2>) {
     if (this._el) { this._$el = $(this._el); }
     if (args) {
       if (args.el) {
@@ -27,31 +24,22 @@ abstract class BaseView<T> {
         this._$el = $(args.el);
       }
       this._setOptions(args);
-    }else {
-      this._deferredOptions.resolve();
     }
-    this._deferredOptions.promise().then(() => {
-      this.render();
-      return this._deferredRender.promise();
-    }).then(() => {
-      this._setEl();
-      return this._deferredSetEl.promise();
-    }).then(() => {
-      this._setEvents();
-      this._setCustomEvents();
-      this._setFn();
-      this.resetModel();
-      this.resetStatus();
-    });
+    this.render();
+    this._setEl();
+    this._setEvents();
+    this._setCustomEvents();
+    this._setFn();
+    this.resetModel();
+    this.resetStatus();
   }
-  protected _setOptions(args?: IBaseView<T>): void {
+  protected _setOptions(args?: IBaseView<T, T2>): void {
     if (args.collection) {
       this.collection = args.collection;
     }else if (args.model) {
       this.model = args.model;
     }
     if (args.template) { this._template = args.template; }
-    this._deferredOptions.resolve();
   }
   protected render(): void {
     const templateDataDefault = { data: {} };
@@ -68,10 +56,9 @@ abstract class BaseView<T> {
         this._$el.append(this._template(templateDataDefault));
       }
     }
-    this._deferredRender.resolve();
   }
   protected _setEl(): void {
-    this._deferredSetEl.resolve();
+    return;
   }
   protected _setEvents(): void {
     return;

@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 /**
  * BaseModel Class Description v2.0.0
  */
