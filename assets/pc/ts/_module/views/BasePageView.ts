@@ -1,16 +1,16 @@
+const Masonry = require('masonry-layout');
+const $ = require('jquery');
+
 import IAppStatus = require('../models/IAppStatus');
 import IAlbum = require('../models/IAlbum');
 import AlbumModel = require('../models/AlbumModel');
 import AppStatusModel = require('../models/AppStatusModel');
 import StatusModel = require('../models/StatusModel');
-
-const $ = require('jquery');
 import IPageView = require('../views/IPageView');
 import BaseView = require('../views/BaseView');
 import AlbumListView = require('../views/AlbumListView');
 
 const ajax = require('../utils/ajax');
-const Masonry = require('../../libs/masonry.pkgd.js');
 
 
 abstract class BasePageView extends BaseView<IAppStatus> {
