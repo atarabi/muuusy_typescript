@@ -1,4 +1,5 @@
 import * as $ from 'jquery';
+const Masonry = require('masonry-layout');
 
 import IAppStatus from '../models/IAppStatus';
 import IAlbum from '../models/IAlbum';
@@ -11,7 +12,6 @@ import BaseView from '../views/BaseView';
 import AlbumListView from '../views/AlbumListView';
 
 import ajax from '../utils/ajax';
-const Masonry = require('../../libs/masonry.pkgd.js');
 
 
 abstract class BasePageView extends BaseView<IAppStatus> {
