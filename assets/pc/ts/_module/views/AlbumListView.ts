@@ -63,6 +63,18 @@ export default class AlbumListView extends BaseView<IAppStatus> {
       }
     });
   }
+  // protected _setEvents(): void {
+  //   this._$el.find('li > a').on('click', (e: JQueryEventObject) => {
+  //     const collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
+  //     this._modalModel = this._getModel(collectionId);
+  //     this.openAlbumDetail();
+  //   });
+  // }
+  // protected _getModel(collectionId: string): AlbumModel {
+  //   return _.find(this.collection, (model: AlbumModel) => {
+  //     return model.get.collectionId === collectionId;
+  //   });
+  // }
   private onImgesLoaded(): void {
     this.show();
     this.fixImgSize();

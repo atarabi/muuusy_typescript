@@ -83,9 +83,8 @@ abstract class BasePageView extends BaseView<IAppStatus> {
     this._albumListViewRender(datas);
   }
   protected _albumListViewRender(datas): void {
-    let collection = [];
-    datas.forEach((album: IAlbum) => {
-      collection.push(new AlbumModel(album));
+    let collection = datas.map((album: IAlbum) => {
+      return new AlbumModel(album);
     });
     this._albumListView = new AlbumListView({
       el: this.el + ' ' + this._albumlistEl,

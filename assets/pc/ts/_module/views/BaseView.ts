@@ -58,10 +58,8 @@ abstract class BaseView<T> {
     if (this._template(templateDataDefault) !== null) {
       this.remove();
       if (this.collection) {
-        let tmpEls = [];
-        this.collection.forEach((model) => {
-          const el = this._template({ data: model.get });
-          tmpEls.push(el);
+        let tmpEls = this.collection.map((model) => {
+          return this._template({ data: model.get });
         });
         this._$el.append(tmpEls.join(''));
       }else if (this.model) {
