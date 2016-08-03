@@ -1,6 +1,7 @@
 import IPageView from '../views/IPageView';
 import BasePageView from '../views/BasePageView';
 
+
 export default class SearchView extends BasePageView {
   protected _ajaxConf: {
     type: string;
@@ -44,8 +45,7 @@ export default class SearchView extends BasePageView {
       this._setMasonry();
     });
   }
-  protected _parseData(datas): void {
-    let collection = datas.results;
+  protected _parseData(collection): void {
     collection.forEach((album) => {
       album.artworkUrl400 = album.artworkUrl100.replace('100x100bb', '400x400bb');
     });

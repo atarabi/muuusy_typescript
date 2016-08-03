@@ -1,12 +1,12 @@
 // ajax
 interface AjaxType {
-  NETWORK_ERROR: string;
   init(): void;
   getStatus(arg: string): string;
 };
 
+const NETWORK_ERROR = '通信エラーです。インターネット回線を確認してください。';
+
 const ajax: AjaxType = {
-  NETWORK_ERROR: '通信エラーです。インターネット回線を確認してください。',
   init: () => {
     $.ajaxSetup({
       timeout: 35000,
@@ -20,7 +20,7 @@ const ajax: AjaxType = {
     }else {
       // 通信エラーの場合
       status = 'networkError';
-      alert(this.NETWORK_ERROR);
+      alert(NETWORK_ERROR);
     }
     return status;
   }

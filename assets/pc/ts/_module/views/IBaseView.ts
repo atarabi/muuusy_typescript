@@ -1,5 +1,6 @@
 import BaseModel from '../models/BaseModel';
 
+
 interface IBaseView<T, T2> {
   el: string;
   model?: BaseModel<T>;

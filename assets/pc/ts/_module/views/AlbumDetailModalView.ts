@@ -9,10 +9,11 @@ import BaseModalView from '../views/BaseModalView';
 
 const albumDetailTmpl = require('../../../templates/home/_partials/albumDetail.ejs');
 
+
 export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> {
   model: AlbumModel;
   collection: AlbumModel[];
-  status: StatusModel = new StatusModel({ isLoading: true, isFav: false });
+  status: StatusModel = new StatusModel({ isLoading: false, isFav: false });
   private _$favIcon: JQuery;
   private _$modalFavTrigger: JQuery;
   constructor(args: IAlbumDetailModalView) {
@@ -37,7 +38,7 @@ export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> 
     });
   };
   protected _toggleFav(): void {
-    this.status.get.isFav = (this._$favIcon.hasClass('fa-heart')) ? true : false;
+    this.status.get.isFav = (!this.status.get.isFav) ? true : false;
     this._checkFavStatus();
     this.status.get.isLoading = false;
   };

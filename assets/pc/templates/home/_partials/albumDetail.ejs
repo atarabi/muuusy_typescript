@@ -10,7 +10,7 @@
       <p>ALBUM: <%= data.collectionName %></p>
       <p>ARTIST: <%= data.artistName %></p>
       <p>GENRE: <%= data.primaryGenreName %></p>
-      <div class="modalFavTrigger jsModalFavTrigger"><a><i class="fa fa-heart-o"></i></a></div>
+      <div class="modalFavTrigger jsModalFavTrigger"><a><i class="fa <% if(data.isFav){ %>fa-heart<% }else{ %>fa-heart-o<% } %> "></i></a></div>
     <% } %>
   </div>
 </div>

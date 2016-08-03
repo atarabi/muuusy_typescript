@@ -17,6 +17,7 @@ import ajax from '../utils/ajax';
 abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
   collection: AlbumModel[];
+  favs: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: false });
   protected _ajaxConf: {
     type: string;
@@ -76,16 +77,41 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
     this.resetList();
     $.ajax(this._ajaxConf).always((jqXHR, textStatus) => {
       const status = ajax.getStatus(textStatus);
-      (status === 'success') ? this._parseData(jqXHR) : this._networkErrorRender();
+      (status === 'success') ? this._getFavs(jqXHR) : this._networkErrorRender();
     });
+  }
+  protected _getFavs(albums): void {
+    $.ajax({
+      type: 'get',
+      url: '/api/favs',
+      dataType: 'json'
+    }).always((jqXHR, textStatus) => {
+      const status = ajax.getStatus(textStatus);
+      if (status === 'success') {
+        albums = this._checkFav(albums, jqXHR);
+        this._parseData(albums);
+      } else {
+        this._networkErrorRender();
+      }
+    });
+  }
+  protected _checkFav(albums, compareAlbums) {
+    albums = (albums.results) ? albums.results : albums;
+    albums.forEach((album) => {
+      album.isFav = false;
+      compareAlbums.forEach((compareAlbum) => {
+        if (album && album.collectionId.toString() === compareAlbum.collectionId.toString()) {
+          album.isFav = true;
+        }
+      });
+    });
+    return albums;
   }
   protected _parseData(datas): void {
     this._albumListViewRender(datas);
   }
   protected _albumListViewRender(datas): void {
-    let collection = datas.map((album: IAlbum) => {
-      return new AlbumModel(album);
-    });
+    let collection = datas.map((album: IAlbum) => { return new AlbumModel(album); });
     this._albumListView = new AlbumListView({
       el: this.el + ' ' + this._albumlistEl,
       model: this.model,
