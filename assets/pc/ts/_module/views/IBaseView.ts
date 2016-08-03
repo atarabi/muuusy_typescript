@@ -1,4 +1,4 @@
-import BaseModel = require('../models/BaseModel');
+import BaseModel from '../models/BaseModel';
 
 interface IBaseView<T> {
   el: string;
@@ -7,4 +7,4 @@ interface IBaseView<T> {
   template?(args?: { data: T }): string;
 };
 
-export = IBaseView;
+export default IBaseView;

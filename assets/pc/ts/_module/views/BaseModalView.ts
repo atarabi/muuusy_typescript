@@ -1,6 +1,7 @@
-import BaseView = require('../views/BaseView');
+import * as $ from 'jquery';
 
-const $ = require('jquery');
+import BaseView from '../views/BaseView';
+
 
 /**
  * BaseModalView Class Description v2.0.0
@@ -50,4 +51,4 @@ abstract class BaseModalView<T> extends BaseView<T> {
   }
 }
 
-export = BaseModalView;
+export default BaseModalView;

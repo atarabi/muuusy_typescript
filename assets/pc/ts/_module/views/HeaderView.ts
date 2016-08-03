@@ -1,14 +1,16 @@
-import IAppStatus = require('../models/IAppStatus');
-import AppStatusModel = require('../models/AppStatusModel');
+import * as $ from 'jquery';
 
-import IHeaderView = require('../views/IHeaderView');
-import BaseView = require('../views/BaseView');
-import BasePageView = require('../views/BasePageView');
+import IAppStatus from '../models/IAppStatus';
+import AppStatusModel from '../models/AppStatusModel';
 
-const $ = require('jquery');
-const checkEnterKeypress = require('../fn/checkEnterKeypress');
+import IHeaderView from '../views/IHeaderView';
+import BaseView from '../views/BaseView';
+import BasePageView from '../views/BasePageView';
 
-class HeaderView extends BaseView<IAppStatus> {
+import checkEnterKeypress from '../fn/checkEnterKeypress';
+
+
+export default class HeaderView extends BaseView<IAppStatus> {
   model: AppStatusModel;
   collection: AppStatusModel[];
   private _$searchText: JQuery;
@@ -80,5 +82,3 @@ class HeaderView extends BaseView<IAppStatus> {
     this._$searchText.off();
   }
 }
-
-export = HeaderView;

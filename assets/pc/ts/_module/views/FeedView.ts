@@ -1,11 +1,9 @@
-import BasePageView = require('../views/BasePageView');
-import setMock = require('../../_api/mock');
+import BasePageView from '../views/BasePageView';
+import setMock from '../../_api/mock';
 
-class FeedView extends BasePageView {
+export default class FeedView extends BasePageView {
   protected _setFn(): void {
     setMock();
     this._getData();
   }
 }
-
-export = FeedView;

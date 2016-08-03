@@ -1,15 +1,16 @@
-import IAppStatus = require('../models/IAppStatus');
-import IAlbum = require('../models/IAlbum');
-import AlbumModel = require('../models/AlbumModel');
-import AppStatusModel = require('../models/AppStatusModel');
-import StatusModel = require('../models/StatusModel');
+import * as $ from 'jquery';
 
-const $ = require('jquery');
-import IPageView = require('../views/IPageView');
-import BaseView = require('../views/BaseView');
-import AlbumListView = require('../views/AlbumListView');
+import IAppStatus from '../models/IAppStatus';
+import IAlbum from '../models/IAlbum';
+import AlbumModel from '../models/AlbumModel';
+import AppStatusModel from '../models/AppStatusModel';
+import StatusModel from '../models/StatusModel';
 
-const ajax = require('../utils/ajax');
+import IPageView from '../views/IPageView';
+import BaseView from '../views/BaseView';
+import AlbumListView from '../views/AlbumListView';
+
+import ajax from '../utils/ajax';
 const Masonry = require('../../libs/masonry.pkgd.js');
 
 
@@ -83,7 +84,7 @@ abstract class BasePageView extends BaseView<IAppStatus> {
   }
   protected _albumListViewRender(datas): void {
     let collection = [];
-    _.each(datas, (album: IAlbum) => {
+    datas.forEach((album: IAlbum) => {
       collection.push(new AlbumModel(album));
     });
     this._albumListView = new AlbumListView({
@@ -118,4 +119,4 @@ abstract class BasePageView extends BaseView<IAppStatus> {
   }
 }
 
-export = BasePageView;
+export default BasePageView;

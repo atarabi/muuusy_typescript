@@ -1,10 +1,10 @@
-import BaseModel = require('../models/BaseModel');
-import StatusModel = require('../models/StatusModel');
+import * as $ from 'jquery';
 
-import IBaseView = require('../views/IBaseView');
+import BaseModel from '../models/BaseModel';
+import StatusModel from '../models/StatusModel';
 
-const $ = jQuery = require('jquery');
-const _ = require('lodash');
+import IBaseView from '../views/IBaseView';
+
 
 /**
  * BaseView Class Description v2.0.0
@@ -16,9 +16,9 @@ abstract class BaseView<T> {
   protected _el: string;
   protected _$el: JQuery;
   protected _template(args?: { data: {} }): string { return null; };
-  private _deferredOptions: JQueryDeferred<void> = jQuery.Deferred<void>();
-  private _deferredRender: JQueryDeferred<void> = jQuery.Deferred<void>();
-  private _deferredSetEl: JQueryDeferred<void> = jQuery.Deferred<void>();
+  private _deferredOptions: JQueryDeferred<void> = $.Deferred<void>();
+  private _deferredRender: JQueryDeferred<void> = $.Deferred<void>();
+  private _deferredSetEl: JQueryDeferred<void> = $.Deferred<void>();
   constructor(args: IBaseView<T>) {
     if (this._el) { this._$el = $(this._el); }
     if (args) {
@@ -59,7 +59,7 @@ abstract class BaseView<T> {
       this.remove();
       if (this.collection) {
         let tmpEls = [];
-        _.each(this.collection, (model) => {
+        this.collection.forEach((model) => {
           const el = this._template({ data: model.get });
           tmpEls.push(el);
         });
@@ -114,4 +114,4 @@ abstract class BaseView<T> {
   }
 }
 
-export = BaseView;
+export default BaseView;

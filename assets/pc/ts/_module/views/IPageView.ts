@@ -1,9 +1,9 @@
-import IAppStatus = require('../models/IAppStatus');
+import IAppStatus from '../models/IAppStatus';
 
-import IBaseView = require('../views/IBaseView');
+import IBaseView from '../views/IBaseView';
 
 interface IPageView extends IBaseView<IAppStatus> {
   url: string;
 };
 
-export = IPageView;
+export default IPageView;

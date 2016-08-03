@@ -26,4 +26,4 @@ const ajax: AjaxType = {
   }
 };
 
-export = ajax;
+export default ajax;

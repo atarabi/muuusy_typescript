@@ -1,7 +1,7 @@
-import IAppStatus = require('../models/IAppStatus');
+import IAppStatus from '../models/IAppStatus';
 
-import IBaseView = require('../views/IBaseView');
-import BasePageView = require('../views/BasePageView');
+import IBaseView from '../views/IBaseView';
+import BasePageView from '../views/BasePageView';
 
 interface IHeaderView extends IBaseView<IAppStatus> {
   views: {
@@ -11,4 +11,4 @@ interface IHeaderView extends IBaseView<IAppStatus> {
   };
 };
 
-export = IHeaderView;
+export default IHeaderView;

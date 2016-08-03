@@ -1,12 +1,10 @@
-import BasePageView = require('../views/BasePageView');
+import BasePageView from '../views/BasePageView';
 
-import setMock = require('../../_api/mock');
+import setMock from '../../_api/mock';
 
-class MypageView extends BasePageView {
+export default class MypageView extends BasePageView {
   protected _setFn(): void {
     setMock();
     this._getData();
   }
 }
-
-export = MypageView;

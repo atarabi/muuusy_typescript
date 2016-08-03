@@ -1,5 +1,5 @@
 // isEnterKeyPress
-const checkEnterKeypress = (e: JQueryEventObject): boolean => {
+export default function checkEnterKeypress(e: JQueryEventObject): boolean {
   let isConverting: boolean = false;
   if (e.type === 'keydown') {
     if (e.which === 229) {
@@ -18,5 +18,3 @@ const checkEnterKeypress = (e: JQueryEventObject): boolean => {
   }
   return false;
 };
-
-export = checkEnterKeypress;

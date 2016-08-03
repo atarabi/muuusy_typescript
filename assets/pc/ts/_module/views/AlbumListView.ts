@@ -1,26 +1,28 @@
-import IAppStatus = require('../models/IAppStatus');
-import AppStatusModel = require('../models/AppStatusModel');
-import AlbumModel = require('../models/AlbumModel');
+import * as $ from 'jquery';
+import * as _ from 'lodash';
+import imagesLoaded = require('imagesloaded');
 
-import IAlbumListView = require('../views/IAlbumListView');
-import BaseView = require('../views/BaseView');
-import BasePageView = require('../views/BasePageView');
-import AlbumDetailModalView = require('../views/AlbumDetailModalView');
+import IAppStatus from '../models/IAppStatus';
+import AppStatusModel  from '../models/AppStatusModel';
+import AlbumModel  from '../models/AlbumModel';
 
-const $ = jQuery = require('jquery');
-const imagesLoaded = require('imagesloaded');
+import IAlbumListView from '../views/IAlbumListView';
+import BaseView from '../views/BaseView';
+import BasePageView from '../views/BasePageView';
+import AlbumDetailModalView from '../views/AlbumDetailModalView';
+
 const albumListTmpl = require('../../../templates/home/_partials/albumList');
 const notFoundTmpl = require('../../../templates/home/_partials/notFound');
 
 
-class AlbumListView extends BaseView<IAppStatus> {
+export default class AlbumListView extends BaseView<IAppStatus> {
   model: AppStatusModel;
   collection: AppStatusModel[];
   parentView: BasePageView;
   private _albumDetailModalView: AlbumDetailModalView;
   private _albumDetailModalViewEl: string = this.parentView.el + ' .albumDetailModalView';
   private _modalModel: AlbumModel;
-  private _deferredEvents: JQueryDeferred<void> = jQuery.Deferred<void>();
+  private _deferredEvents: JQueryDeferred<void> = $.Deferred<void>();
   private _masonryClass: string = '.jsMasonryBox';
   constructor(args: IAlbumListView) {
     super(args);
@@ -93,5 +95,3 @@ class AlbumListView extends BaseView<IAppStatus> {
     this._$el.find('li > a').off();
   }
 }
-
-export = AlbumListView;

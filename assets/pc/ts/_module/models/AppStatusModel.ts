@@ -1,6 +1,4 @@
-import IAppStatus = require('../models/IAppStatus');
-import BaseModel = require('../models/BaseModel');
+import IAppStatus from '../models/IAppStatus';
+import BaseModel from '../models/BaseModel';
 
-class AppStatusModel extends BaseModel<IAppStatus> {};
-
-export = AppStatusModel;
+export default class AppStatusModel extends BaseModel<IAppStatus> {};

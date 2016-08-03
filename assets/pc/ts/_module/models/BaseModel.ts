@@ -19,4 +19,4 @@ abstract class BaseModel<T> {
   }
 }
 
-export = BaseModel;
+export default BaseModel;

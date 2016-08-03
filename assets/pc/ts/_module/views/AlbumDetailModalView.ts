@@ -1,13 +1,13 @@
-import IAlbum = require('../models/IAlbum');
-import StatusModel = require('../models/StatusModel');
-import AlbumModel = require('../models/AlbumModel');
+import IAlbum from '../models/IAlbum';
+import StatusModel from '../models/StatusModel';
+import AlbumModel from '../models/AlbumModel';
 
-import IAlbumDetailModalView = require('../views/IAlbumDetailModalView');
-import BaseModalView = require('../views/BaseModalView');
+import IAlbumDetailModalView from '../views/IAlbumDetailModalView';
+import BaseModalView from '../views/BaseModalView';
 
 const albumDetailTmpl = require('../../../templates/home/_partials/albumDetail.ejs');
 
-class AlbumDetailModalView extends BaseModalView<IAlbum> {
+export default class AlbumDetailModalView extends BaseModalView<IAlbum> {
   model: AlbumModel;
   collection: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: true, isFav: false });
@@ -57,5 +57,3 @@ class AlbumDetailModalView extends BaseModalView<IAlbum> {
     });
   }
 }
-
-export = AlbumDetailModalView;

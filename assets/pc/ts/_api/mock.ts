@@ -1,8 +1,8 @@
-const $ = require('jquery');
+import * as $ from 'jquery';
 require('jquery-mockjax')($, window);
 
 // API Mock
-const setMock = (): void => {
+export default function setMock(): void {
   $.mockjax({
     url: '/api/feed',
     proxy: '/js/_api/feed.json',
@@ -16,5 +16,3 @@ const setMock = (): void => {
     responseTime: 500
   });
 };
-
-export = setMock;
