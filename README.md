@@ -1,10 +1,10 @@
 # TypeScript Sample
 
 ```
-npm install
+$ npm install
 ```
 
-##概要
+## 概要
 
 - TypeScript、Babel、webpackを用いた静的型付け+ES6の開発環境。  
 - Mocha, Power-Assert、Sinonを用いたTDD。
@@ -12,7 +12,7 @@ npm install
 ※Babelを利用する場合はES5ベースになるので、IE9以上のモダンブラウザのみ対応。
 
 
-##HTML
+## HTML
 
 assets
 
@@ -33,7 +33,7 @@ top/samplePage.html
 ```
 
 
-##CSS
+## CSS
 
 assets
 
@@ -54,7 +54,7 @@ css/
   samplePage/index.css
 ```
 
-##JS
+## JS
 
 assets
 
@@ -82,7 +82,7 @@ js/
   samplePage.js
 ```
 
-##IMG
+## IMG
 
 assets
 
@@ -107,29 +107,29 @@ img/
 
 ```
 # ディレクトリを監視(assets/pc)
-gulp
+$ gulp
 
 # 指定ディレクトリを監視（assets/spディレクトリを監視する例)
-gulp -sp
+$ gulp -sp
 ```
 
 ### リリースファイル作成
 
 ```
-gulp dist
+$ gulp dist
 ```
 
 ### 個別タスク
 
 ```
-gulp clean
-gulp copy
-gulp ejs
-gulp html
-gulp script
-gulp server
-gulp sprite
-gulp style
+$ gulp clean
+$ gulp copy
+$ gulp ejs
+$ gulp html
+$ gulp script
+$ gulp server
+$ gulp sprite
+$ gulp style
 ```
 
 ### 使用ツール
