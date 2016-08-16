@@ -4,6 +4,7 @@
   "description": "Gulp - Typescript template",
   "main": "gulpfile.js",
   "dependencies": {
+    "font-awesome-stylus": "^4.6.2",
     "imagesloaded": "^4.1.0",
     "jquery": "^3.0.0",
     "jquery-bridget": "^2.0.0",
