@@ -1,5 +1,5 @@
 interface IAppStatus {
-  searchWord: string;
+  term: string;
   appStatus?: string;
 };
 

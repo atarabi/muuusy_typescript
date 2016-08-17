@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 abstract class BaseModel<T> {
   protected _attributes: T;
   constructor(args?: T) {
-     this._attributes = args || null;
+    this._attributes = args || null;
   }
   get get(): T {
     return this._attributes;

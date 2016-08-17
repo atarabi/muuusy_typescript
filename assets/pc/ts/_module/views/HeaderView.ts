@@ -5,11 +5,17 @@ import IAlbum from '../models/IAlbum';
 import AppStatusModel from '../models/AppStatusModel';
 import AlbumModel from '../models/AlbumModel';
 
-import IHeaderView from '../views/IHeaderView';
 import BaseView from '../views/BaseView';
 import BasePageView from '../views/BasePageView';
+import FeedView from '../views/FeedView';
+import SearchView from '../views/SearchView';
+import MypageView from '../views/MypageView';
 
 import checkEnterKeypress from '../fn/checkEnterKeypress';
+
+const feedViewTmpl = require('../../../templates/home/_partials/homeView.ejs');
+const mypageViewTmpl = require('../../../templates/home/_partials/mypageView.ejs');
+const searchViewTmpl = require('../../../templates/home/_partials/searchView.ejs');
 
 
 export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
@@ -20,18 +26,9 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
   private _$notificationTrigger: JQuery;
   private _$userTrigger: JQuery;
   private _$searchTrigger: JQuery;
-  private _views: {
-    homeView: BasePageView;
-    mypageView: BasePageView;
-    searchView: BasePageView;
-  };
-  constructor(args: IHeaderView) {
-    super(args);
-  }
-  protected _setOptions(args?: IHeaderView): void {
-    super._setOptions(args);
-    this._views = args.views;
-  }
+  private _homeView: BasePageView;
+  private _mypageView: BasePageView;
+  private _searchView: BasePageView;
   protected _setEl(): void {
     super._setEl();
     this._$searchText = this._$el.find('.searchText');
@@ -41,40 +38,55 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
     this._$searchTrigger = this._$el.find('.searchTrigger');
   };
   protected _setEvents(): void {
-    this._$homeTrigger.on('click', () => {
-      this.movePage($(this), 'home');
-      this._views.homeView.$el.trigger('onOpen');
-    });
-    this._$userTrigger.on('click', () => {
-      this.movePage($(this), 'mypage');
-      this._views.mypageView.$el.trigger('onOpen');
-    });
+    this._$homeTrigger.on('click', () => this.openPage('#homeView', ''));
+    this._$userTrigger.on('click', () => this.openPage('#mypageView', ''));
     this._$searchTrigger.on('click', (e: JQueryEventObject) => {
       if (this._$searchText.val().length > 0) {
-        this.movePage($(e.target), 'search');
         e.preventDefault();
-        const term = this._$searchText.val();
-        this._views.searchView.$el.trigger('onOpen', [term]);
+        this.openPage('#searchView', this._$searchText.val());
       }
     });
     this._$searchText.on('keydown keyup', (e: JQueryEventObject) => {
-      if (checkEnterKeypress(e) && $(e.target).val().length > 0) {
-        this.movePage($(e.target), 'search');
-        const term = this._$searchText.val();
-        this._views.searchView.$el.trigger('onOpen', [term]);
-        $(e.target).blur();
+      if (checkEnterKeypress(e) && $(e.currentTarget).val().length > 0) {
+        $(e.currentTarget).blur();
+        this.openPage('#searchView', $(e.currentTarget).val());
       }
     });
   };
-  protected movePage($tgt: JQuery, pageName: string): void {
+  openPage(id: string, term: string): void {
+    const $view = $(id);
     $('.pageView').addClass('hide');
-    if (pageName === 'home') {
-      $('#homeView').removeClass('hide').hide().fadeIn(300);
-    }else if (pageName === 'mypage') {
-      $('#mypageView').removeClass('hide').hide().fadeIn(300);
-    }else if (pageName === 'search') {
-      $('#searchView').removeClass('hide').hide().fadeIn(300);
+    switch (id) {
+      case '#homeView':
+        if (this._homeView) { this._homeView.destroy(); }
+        $view.append(feedViewTmpl());
+        this._homeView = new FeedView({
+          el: id,
+          model: this.model,
+          url: '/api/feed'
+        });
+        break;
+      case '#mypageView':
+        if (this._mypageView) { this._mypageView.destroy(); }
+        $view.append(mypageViewTmpl());
+        this._mypageView = new MypageView({
+          el: id,
+          model: this.model,
+          url: '/api/favs'
+        });
+        break;
+      case '#searchView':
+        if (this._searchView) { this._searchView.destroy(); }
+        $view.append(searchViewTmpl());
+        this.model.get.term = term;
+        this._searchView = new SearchView({
+          el: id,
+          model: this.model,
+          url: 'https://itunes.apple.com/search'
+        });
+        break;
     }
+    $view.removeClass('hide').hide().fadeIn(300);
   }
   resetEvents(): void {
     super.resetEvents();

@@ -20,7 +20,7 @@ export default class SearchView extends BasePageView {
   protected _setOptions(args?: IPageView): void {
     super._setOptions(args);
     const reqData = {
-      term: '',
+      term: this.model.get.term,
       country: 'US',
       lang: 'en_us',
       media: 'music',
@@ -31,19 +31,9 @@ export default class SearchView extends BasePageView {
     this._ajaxConf.jsonpCallback = 'callback';
     this._ajaxConf.dataType = 'jsonp';
   }
-  protected _setCustomEvents(): void {
-    this._$el.on('onOpen', (e: JQueryEventObject, searchWord: string) => {
-      this.model.set = { searchWord: searchWord };
-      this._ajaxConf.data.term = searchWord;
-      this._getData();
-    });
-    this._$el.on('loadingFinish', () => {
-      this.status.get.isLoading = false;
-      this._checkLoading();
-    });
-    this._$el.on('AlbumViewOnRender', () => {
-      this._setMasonry();
-    });
+  protected _setFn(): void {
+    super._setFn();
+    this._getData();
   }
   protected _parseData(collection): void {
     collection.forEach((album) => {

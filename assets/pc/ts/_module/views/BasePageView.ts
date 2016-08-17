@@ -10,6 +10,7 @@ import StatusModel from '../models/StatusModel';
 import IPageView from '../views/IPageView';
 import BaseView from '../views/BaseView';
 import AlbumListView from '../views/AlbumListView';
+import LoaderView from './LoaderView';
 
 import ajax from '../utils/ajax';
 
@@ -30,8 +31,9 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   protected _$loader: JQuery;
   protected _masonryClass: string = '.jsMasonryBox';
   private _albumlistEl: string = '.albumList';
-  private _msnry: IMasonry;
+  private _msnry: any;
   private _$masonryBox: JQuery;
+  private _loaderView: LoaderView;
   constructor(args: IPageView) {
     super(args);
   }
@@ -51,29 +53,38 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
     this._$masonryBox = this._$el.find('.jsMasonry');
   }
   protected _setCustomEvents(): void {
-    this._$el.on('onOpen', () => {
-      this._msnry.layout();
+    super._setCustomEvents();
+    this._setLoader();
+    this.observer.on('AlbumViewOnRender', () =>  this._setMasonry());
+    this.observer.on('loadingStart', () => {
+      this.status.get.isLoading = true;
+      this._loaderView.show();
     });
-    this._$el.on('loadingFinish', () => {
+    this.observer.on('loadingFinish', () => {
       this.status.get.isLoading = false;
-      this._checkLoading();
-    });
-    this._$el.on('AlbumViewOnRender', () => {
-      this._setMasonry();
+      this._loaderView.hide();
     });
   }
+  protected _setLoader() {
+    this._loaderView = new LoaderView({ el: '#loaderView' });
+    this._loaderView.show();
+  }
   protected _setMasonry(): void {
-    this._msnry = new Masonry(this._$masonryBox[0], {
-      itemSelector: this._masonryClass,
-      columnWidth: this._masonryClass,
-      percentPosition: true,
-      transitionDuration: '0.2s'
-    });
+    if (!this._msnry) {
+      this._msnry = new Masonry(this._$masonryBox[0], {
+        itemSelector: this._masonryClass,
+        columnWidth: this._masonryClass,
+        percentPosition: true,
+        transitionDuration: '0.2s'
+      });
+    } else {
+      this._msnry.reloadItems();
+      this._msnry.layout();
+    }
   }
   protected _getData(): void {
     this._resetChildView();
-    this.status.get.isLoading = true;
-    this._checkLoading();
+    this.observer.emit('loadingStart');
     this.resetList();
     $.ajax(this._ajaxConf).always((jqXHR, textStatus) => {
       const status = ajax.getStatus(textStatus);
@@ -100,9 +111,7 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
     albums.forEach((album) => {
       album.isFav = false;
       compareAlbums.forEach((compareAlbum) => {
-        if (album && album.collectionId.toString() === compareAlbum.collectionId.toString()) {
-          album.isFav = true;
-        }
+        if (album && album.collectionId.toString() === compareAlbum.collectionId.toString()) { album.isFav = true; }
       });
     });
     return albums;
@@ -118,20 +127,11 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
       collection: collection,
       parentView: this
     });
-    this.status.get.isLoading = false;
-    this._checkLoading();
+    this.observer.emit('loadingFinish');
   }
   protected _networkErrorRender(): void {
-    this.status.get.isLoading = false;
-    this._checkLoading();
+    this.observer.emit('loadingFinish');
   }
-  protected _checkLoading(): void {
-    if (this.status.get.isLoading) {
-      this._$loader.removeClass('hide').show();
-    }else {
-      this._$loader.addClass('hide').hide();
-    }
-  };
   protected _resetChildView(): void {
     if (this._albumListView) { this._albumListView.destroy(); }
   }

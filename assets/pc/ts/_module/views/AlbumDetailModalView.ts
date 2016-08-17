@@ -1,6 +1,5 @@
 import IAppStatus from '../models/IAppStatus';
 import IAlbum from '../models/IAlbum';
-import AppStatusModel from '../models/AppStatusModel';
 import StatusModel from '../models/StatusModel';
 import AlbumModel from '../models/AlbumModel';
 
@@ -32,7 +31,7 @@ export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> 
     super._setEvents();
     this._$modalFavTrigger.on('click', () => {
       if (!this.status.get.isLoading) {
-        this.status.get.isLoading = true;
+        this.observer.emit('loadingStart');
         this._toggleFav();
       }
     });
@@ -40,7 +39,7 @@ export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> 
   protected _toggleFav(): void {
     this.status.get.isFav = (!this.status.get.isFav) ? true : false;
     this._checkFavStatus();
-    this.status.get.isLoading = false;
+    this.observer.emit('loadingFinish');
   };
   protected _checkFavStatus(): void {
     if (this.status.get.isFav) {

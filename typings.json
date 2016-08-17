@@ -1,0 +1,9 @@
+{
+  "name": "gulp_typescript_temp",
+  "globalDependencies": {
+    "jquery-mockjax": "github:DefinitelyTyped/DefinitelyTyped/jquery-mockjax/jquery-mockjax.d.ts#dbb2d9f1f1f0e50a3530dcfc02944f492be246dd",
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#dbb2d9f1f1f0e50a3530dcfc02944f492be246dd",
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#e937b3e64af586d19f2ea29fdf771e9dc4feecc8",
+    "ejs": "github:DefinitelyTyped/DefinitelyTyped/ejs/ejs.d.ts#e937b3e64af586d19f2ea29fdf771e9dc4feecc8"
+  }
+}

@@ -36,13 +36,14 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
     super.render();
     this._$el.hide().removeClass('hide');
     if (this.collection.length > 0) {
+      this.$el.hide().removeClass('hide');
       imagesLoaded(this._$el, this.onImgesLoaded());
-    }else {
+    } else {
       this.notFoundRender();
     }
   }
   protected show(): void {
-    this.parentView.$el.trigger('loadingFinish');
+    this.parentView.observer.emit('loadingFinish');
     this._$el.fadeIn(300);
   }
   protected _setEvents(): void {
@@ -60,11 +61,11 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   private onImgesLoaded(): void {
     this.show();
     this.fixImgSize();
-    this.parentView.$el.trigger('AlbumViewOnRender');
+    this.parentView.observer.emit('AlbumViewOnRender');
   }
   private notFoundRender(): void {
     this.show();
-    this._$el.append(notFoundTmpl({searchWord: this.model.get.searchWord}));
+    this._$el.append(notFoundTmpl({term: this.model.get.term}));
   }
   private fixImgSize(): void {
     this._$el.children().each(() => {
