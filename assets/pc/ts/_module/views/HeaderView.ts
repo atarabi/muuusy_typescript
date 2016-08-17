@@ -67,7 +67,6 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
         });
         break;
       case '#mypageView':
-        if (this._mypageView) { console.log(this._mypageView.status.get.isLoading); }
         if (this._mypageView) { this._mypageView.destroy(); }
         $view.append(mypageViewTmpl());
         this._mypageView = new MypageView({
