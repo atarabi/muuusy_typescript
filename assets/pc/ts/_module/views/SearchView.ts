@@ -31,10 +31,6 @@ export default class SearchView extends BasePageView {
     this._ajaxConf.jsonpCallback = 'callback';
     this._ajaxConf.dataType = 'jsonp';
   }
-  protected _setFn(): void {
-    super._setFn();
-    this._getData();
-  }
   protected _parseData(collection): void {
     collection.forEach((album) => {
       album.artworkUrl400 = album.artworkUrl100.replace('100x100bb', '400x400bb');

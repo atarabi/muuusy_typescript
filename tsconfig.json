@@ -52,7 +52,6 @@
     "./assets/pc/ts/_module/views/IAlbumListView.ts",
     "./assets/pc/ts/_module/views/IBaseView.ts",
     "./assets/pc/ts/_module/views/IPageView.ts",
-    "./assets/pc/ts/_module/views/ISearchView.ts",
     "./assets/pc/ts/_module/views/LoaderView.ts",
     "./assets/pc/ts/_module/views/MypageView.ts",
     "./assets/pc/ts/_module/views/SearchView.ts",

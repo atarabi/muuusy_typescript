@@ -18,9 +18,7 @@ abstract class BaseModalView<T, T2> extends BaseView<T, T2> {
     this._$closeTrigger = this._$el.find('.jsModalCloseTrigger');
   }
   protected _setEvents(): void {
-    this._$inner.on('click', (e: JQueryEventObject) => {
-      e.stopPropagation();
-    });
+    this._$inner.on('click', (e: JQueryEventObject) => e.stopPropagation());
     this._$el.on('click', (e: JQueryEventObject) => {
       e.preventDefault();
       this.close();
@@ -29,12 +27,15 @@ abstract class BaseModalView<T, T2> extends BaseView<T, T2> {
       e.preventDefault();
       this.close();
     });
-    this.open();
   }
   resetEvents(): void {
     super.resetEvents();
     this._$inner.off();
     this._$closeTrigger.off();
+  }
+  protected _setFn() {
+    super._setFn();
+    this.open();
   }
   open(): void {
     this._$wrapper.hide().fadeIn(this._fadeSpeed);

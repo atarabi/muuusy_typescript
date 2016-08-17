@@ -10,7 +10,7 @@ import IBaseView from '../views/IBaseView';
 abstract class BaseView<T, T2> {
   model: BaseModel<T>;
   collection: BaseModel<T2>[];
-  status: StatusModel = new StatusModel({ isLoading: true });
+  status: StatusModel = new StatusModel({ isLoading: false });
   observer: EventEmitter2;
   protected _el: string;
   protected _$el: JQuery;

@@ -13,7 +13,8 @@ import AlbumListView from '../views/AlbumListView';
 import LoaderView from './LoaderView';
 
 import ajax from '../utils/ajax';
-
+import setMock from '../../_api/mock';
+setMock();
 
 abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
@@ -31,7 +32,7 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   protected _$loader: JQuery;
   protected _masonryClass: string = '.jsMasonryBox';
   private _albumlistEl: string = '.albumList';
-  private _msnry: any;
+  private _msnry: any; // ToDo: type: Masonry
   private _$masonryBox: JQuery;
   private _loaderView: LoaderView;
   constructor(args: IPageView) {
@@ -69,6 +70,10 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
     this._loaderView = new LoaderView({ el: '#loaderView' });
     this._loaderView.show();
   }
+  protected _setFn(): void {
+    super._setFn();
+    this._getData();
+  }
   protected _setMasonry(): void {
     if (!this._msnry) {
       this._msnry = new Masonry(this._$masonryBox[0], {
@@ -83,8 +88,8 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
     }
   }
   protected _getData(): void {
-    this._resetChildView();
     this.observer.emit('loadingStart');
+    this._resetChildView();
     this.resetList();
     $.ajax(this._ajaxConf).always((jqXHR, textStatus) => {
       const status = ajax.getStatus(textStatus);
@@ -127,7 +132,6 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
       collection: collection,
       parentView: this
     });
-    this.observer.emit('loadingFinish');
   }
   protected _networkErrorRender(): void {
     this.observer.emit('loadingFinish');

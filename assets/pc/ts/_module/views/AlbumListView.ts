@@ -19,6 +19,7 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
   collection: AlbumModel[];
   parentView: BasePageView;
+  private _$modalOpenTrigger: JQuery;
   private _albumDetailModalView: AlbumDetailModalView;
   private _albumDetailModalViewEl: string = this.parentView.el + ' .albumDetailModalView';
   private _modalModel: AlbumModel;
@@ -29,8 +30,12 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   protected _setOptions(args?: IAlbumListView): void {
     args.template = albumListTmpl;
     this.parentView = args.parentView;
-    super._setOptions(args);
     this.model = args.model;
+    super._setOptions(args);
+  }
+  protected _setEl() {
+    super._setEl();
+    this._$modalOpenTrigger = this.$el.find('.jsModalOpenTrigger');
   }
   protected render(): void {
     super.render();
@@ -47,7 +52,7 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
     this._$el.fadeIn(300);
   }
   protected _setEvents(): void {
-    this._$el.find('li > a').on('click', (e: JQueryEventObject) => {
+    this._$modalOpenTrigger.on('click', (e: JQueryEventObject) => {
       const collectionId = $(e.target).closest(this._masonryClass).data('collectionId');
       this._modalModel = this._getModel(collectionId);
       this.openAlbumDetail();
@@ -68,7 +73,7 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
     this._$el.append(notFoundTmpl({term: this.model.get.term}));
   }
   private fixImgSize(): void {
-    this._$el.children().each(() => {
+    this._$el.children().each(function() {
       const $img = $(this).find('img');
       const width = $img.width();
       const height = $img.height();
@@ -87,6 +92,6 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   }
   resetEvents(): void {
     super.resetEvents();
-    this._$el.find('li > a').off();
+    this._$modalOpenTrigger.off();
   }
 }
