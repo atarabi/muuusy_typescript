@@ -30,15 +30,17 @@ export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> 
     super._setEvents();
     this._$modalFavTrigger.on('click', () => {
       if (!this.status.get.isLoading) {
-        this.status.get.isLoading = true;
+        this.status.set = { isLoading: true };
         this._toggleFav();
       }
     });
   };
   protected _toggleFav(): void {
-    this.status.get.isFav = (!this.status.get.isFav) ? true : false;
-    this.status.get.isLoading = false;
-    this._checkFavStatus();
+    setTimeout(() => {
+      this.status.set = (!this.status.get.isFav) ? { isFav: true } : { isFav: false };
+      this.status.set = { isLoading: false };
+      this._checkFavStatus();
+    }, 200);
   };
   protected _checkFavStatus(): void {
     if (this.status.get.isFav) {

@@ -38,15 +38,28 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
     this._$searchTrigger = this._$el.find('.searchTrigger');
   };
   protected _setEvents(): void {
-    this._$homeTrigger.on('click', () => this.openPage('#homeView', ''));
-    this._$userTrigger.on('click', () => this.openPage('#mypageView', ''));
+    this._$homeTrigger.on('click', () => {
+      if (this._homeView && this._homeView.status.get.isLoading) { return false; }
+      if (this._homeView && !this._homeView.status.get.isLoading) { this._homeView.status.set = { isLoading: true }; }
+      this.openPage('#homeView', '');
+    });
+    this._$userTrigger.on('click', () => {
+      if (this._mypageView && this._mypageView.status.get.isLoading) { return false; }
+      if (this._mypageView && !this._mypageView.status.get.isLoading) {
+        this._mypageView.status.set = { isLoading: true };
+        console.log(this._mypageView.status.get.isLoading);
+      }
+      this.openPage('#mypageView', '');
+    });
     this._$searchTrigger.on('click', (e: JQueryEventObject) => {
+      if (this._searchView && this._searchView.status.get.isLoading) { return false; }
       if (this._$searchText.val().length > 0) {
         e.preventDefault();
         this.openPage('#searchView', this._$searchText.val());
       }
     });
     this._$searchText.on('keydown keyup', (e: JQueryEventObject) => {
+      if (this._searchView && this._searchView.status.get.isLoading) { return false; }
       if (checkEnterKeypress(e) && $(e.currentTarget).val().length > 0) {
         $(e.currentTarget).blur();
         this.openPage('#searchView', $(e.currentTarget).val());
@@ -78,7 +91,7 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
       case '#searchView':
         if (this._searchView) { this._searchView.destroy(); }
         $view.append(searchViewTmpl());
-        this.model.get.term = term;
+        this.model.set = { term: term };
         this._searchView = new SearchView({
           el: id,
           model: this.model,

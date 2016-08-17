@@ -20,7 +20,7 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
   model: AppStatusModel;
   collection: AlbumModel[];
   favs: AlbumModel[];
-  status: StatusModel = new StatusModel({ isLoading: false });
+  status: StatusModel = new StatusModel({ isLoading: true });
   protected _ajaxConf: {
     type: string;
     url: string;
@@ -58,11 +58,11 @@ abstract class BasePageView extends BaseView<IAppStatus, IAlbum> {
     this._setLoader();
     this.observer.on('AlbumViewOnRender', () =>  this._setMasonry());
     this.observer.on('loadingStart', () => {
-      this.status.get.isLoading = true;
+      this.status.set = { isLoading: true };
       this._loaderView.show();
     });
     this.observer.on('loadingFinish', () => {
-      this.status.get.isLoading = false;
+      this.status.set = { isLoading: false };
       this._loaderView.hide();
     });
   }

@@ -1,9 +1,3 @@
-import * as _ from 'lodash';
-
-/**
- * BaseModel Class Description v2.0.0
- */
-
 abstract class BaseModel<T> {
   protected _attributes: T;
   constructor(args?: T) {
@@ -14,7 +8,7 @@ abstract class BaseModel<T> {
   }
   set set(args: T) {
     args = this.validate(args);
-    this._attributes = _.merge(this._attributes, args);
+    this._attributes = Object.assign(this._attributes, args);
   }
   protected validate(args: T): T {
     return args;

@@ -1,5 +1,5 @@
 interface StatusType {
-  isLoading: boolean;
+  isLoading?: boolean;
   isFav?: boolean;
 };
 

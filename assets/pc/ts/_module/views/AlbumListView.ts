@@ -64,9 +64,11 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
     });
   }
   private onImgesLoaded(): void {
-    this.show();
-    this.fixImgSize();
-    this.parentView.observer.emit('AlbumViewOnRender');
+    setTimeout(() => {
+      this.show();
+      this.fixImgSize();
+      this.parentView.observer.emit('AlbumViewOnRender');
+    }, 200);
   }
   private notFoundRender(): void {
     this.show();
