@@ -47,7 +47,6 @@
     "./assets/pc/ts/_module/views/AlbumDetailModalView.ts",
     "./assets/pc/ts/_module/views/AlbumListView.ts",
     "./assets/pc/ts/_module/views/HeaderView.ts",
-    "./assets/pc/ts/_module/views/interface/IAlbumDetailModalView.ts",
     "./assets/pc/ts/_module/views/interface/IAlbumListView.ts",
     "./assets/pc/ts/_module/views/interface/IBaseView.ts",
     "./assets/pc/ts/_module/views/interface/IPageView.ts",

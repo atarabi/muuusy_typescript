@@ -16,7 +16,6 @@ const albumDetailTmpl = require('../../../templates/home/_partials/albumDetail.e
 
 
 export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
-  model: AppStatusModel;
   private parentView: PageView;
   private $modalOpenTrigger: JQuery;
   private albumDetailModalView: AlbumDetailModalView;
@@ -66,20 +65,20 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
   }
   private onImgesLoaded(): void {
     setTimeout(() => {
-      this.show();
-      this.fixImgSize();
-      this.parentView.observer.emit('AlbumViewOnRender');
+      this.show().fixImgSize().parentView.observer.emit('AlbumViewOnRender');
     }, 200);
   }
-  private notFoundRender(): void {
+  private notFoundRender(): this {
     this.show();
     this.$el.append(notFoundTmpl({term: this.model.get.term}));
+    return this;
   }
-  protected show(): void {
+  protected show(): this {
     this.parentView.observer.emit('loadingFinish');
     this.$el.fadeIn(300);
+    return this;
   }
-  private fixImgSize(): void {
+  private fixImgSize(): this {
     this.$el.children().each(function() {
       const $img = $(this).find('img');
       const width = $img.width();
@@ -89,13 +88,15 @@ export default class AlbumListView extends BaseView<IAppStatus, IAlbum> {
         // img.css({height: width});
       }
     });
+    return this;
   }
-  private openAlbumDetail(): void {
+  private openAlbumDetail(): this {
     if (this.albumDetailModalView) { this.albumDetailModalView.destroy(); }
     this.albumDetailModalView = new AlbumDetailModalView({
       el: this.albumDetailModalViewEl,
       model: this.modalModel,
       template: albumDetailTmpl
     });
+    return this;
   }
 }

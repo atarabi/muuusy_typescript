@@ -2,20 +2,13 @@ import IAlbum from '../models/interface/IAlbum';
 import StatusModel from '../models/StatusModel';
 import AlbumModel from '../models/AlbumModel';
 
-import IAlbumDetailModalView from '../views/interface/IAlbumDetailModalView';
 import BaseModalView from '../views/abstruct/BaseModalView';
 
 
 export default class AlbumDetailModalView extends BaseModalView<IAlbum, IAlbum> {
-  model: AlbumModel;
   status: StatusModel = new StatusModel({ isLoading: false, isFav: false });
   private $favIcon: JQuery;
   private $modalFavTrigger: JQuery;
-  constructor(args: IAlbumDetailModalView) { super(args); }
-  protected setOptions(args?: IAlbumDetailModalView): this {
-    super.setOptions(args);
-    return this;
-  }
   protected setEl(): this {
     super.setEl();
     this.$modalFavTrigger = this.$el.find('.jsModalFavTrigger');

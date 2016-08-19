@@ -17,8 +17,6 @@ const albumListTmpl = require('../../../templates/home/_partials/albumList');
 
 
 export default class BasePageView extends BaseView<IAppStatus, IAlbum> {
-  model: AppStatusModel;
-  collection: AlbumModel[];
   status: StatusModel = new StatusModel({ isLoading: true });
   protected favs: AlbumModel[];
   protected albumListView: AlbumListView;
@@ -59,11 +57,10 @@ export default class BasePageView extends BaseView<IAppStatus, IAlbum> {
   protected setFn(): this {
     super.setFn();
     this.observer.emit('loadingStart');
-    this.resetChildView();
-    this.resetList();
+    this.resetChildView().resetList();
     if (this.status.get.url) {
       const term = this.model.get.term || '';
-      getData(this.status.get.url, term).then((albums) => {
+      getData(this.status.get.url, term).then((albums: any) => {
         this.albumListViewRender(albums);
       }, (albums) => {
         this.networkErrorRender();
@@ -90,7 +87,7 @@ export default class BasePageView extends BaseView<IAppStatus, IAlbum> {
     }
     return this;
   }
-  protected albumListViewRender(albums: any): void {
+  protected albumListViewRender(albums: any): this {
     let collection: AlbumModel[] = albums.map((album: IAlbum) => { return new AlbumModel(album); });
     this.albumListView = new AlbumListView({
       el: this.el + ' ' + this.albumlistEl,
@@ -99,15 +96,19 @@ export default class BasePageView extends BaseView<IAppStatus, IAlbum> {
       template: albumListTmpl,
       parentView: this
     });
+    return this;
   }
-  protected networkErrorRender(): void {
+  protected networkErrorRender(): this {
     this.observer.emit('loadingFinish');
+    return this;
   }
-  protected resetChildView(): void {
+  protected resetChildView(): this {
     if (this.albumListView) { this.albumListView.destroy(); }
+    return this;
   }
-  protected resetList(): void {
+  protected resetList(): this {
     this.$albumList.addClass('hide').hide();
     this.$albumList.children().remove();
+    return this;
   }
 }

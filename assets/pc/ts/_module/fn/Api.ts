@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 import setMock from '../../_api/mock';
 setMock();
 
-const ajaxConf = (url: string, term: string): any => {
+const ajaxConf = (url: string, term: string): Object => {
   let conf = {
     type: 'get',
     url: url,
@@ -25,8 +25,7 @@ const ajaxConf = (url: string, term: string): any => {
   return conf;
 };
 
-const checkFav = (albums: any, compareAlbums: any): any => {
-  albums = (albums.results) ? albums.results : albums;
+const checkFav = (albums: [any], compareAlbums: [any]): [any] => {
   albums.forEach((album) => {
     album.isFav = false;
     compareAlbums.forEach((compareAlbum) => {
@@ -36,7 +35,7 @@ const checkFav = (albums: any, compareAlbums: any): any => {
   return albums;
 };
 
-const parseData = (albums: any): any => {
+const parseData = (albums: [any]): [any] => {
   if (albums[0].artworkUrl100) {
     albums.forEach((album) => {
       album.artworkUrl400 = album.artworkUrl100.replace('100x100bb', '400x400bb');
@@ -47,9 +46,10 @@ const parseData = (albums: any): any => {
 
 const getData = (url: string, term: string): Promise<any> => {
   return new Promise((resolve, reject) => {
-    const getFavs = (albums: any): void => {
-      $.ajax(ajaxConf('/api/favs', '')).then((res) => {
-        const newAlbums: any = parseData(checkFav(albums, res));
+    const getFavs = (albums: [any]): void => {
+      $.ajax(ajaxConf('/api/favs', '')).then((res: any) => {
+        const resAlbum: [any] = (res.results) ? res.results : albums;
+        const newAlbums: [any] = parseData(checkFav(albums, resAlbum));
         resolve(newAlbums);
       }, (err) => {
         console.error(err);

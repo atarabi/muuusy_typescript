@@ -1,5 +1,7 @@
-const loaderTmpl = require('../../../templates/_partials/loader.ejs');
 import * as $ from 'jquery';
+
+const loaderTmpl = require('../../../templates/_partials/loader.ejs');
+
 
 export default class LoaderView {
   private $el: JQuery;

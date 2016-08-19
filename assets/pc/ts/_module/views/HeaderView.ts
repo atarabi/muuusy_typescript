@@ -16,7 +16,6 @@ const searchViewTmpl = require('../../../templates/home/_partials/searchView.ejs
 
 
 export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
-  model: AppStatusModel;
   private $searchText: JQuery;
   private $homeTrigger: JQuery;
   private $notificationTrigger: JQuery;
