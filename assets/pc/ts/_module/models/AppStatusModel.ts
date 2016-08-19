@@ -1,5 +1,6 @@
-import IAppStatus from '../models/IAppStatus';
-import BaseModel from '../models/BaseModel';
+import IAppStatus from '../models/interface/IAppStatus';
+import BaseModel from '../models/abstruct/BaseModel';
+
 
 export default class AppStatusModel extends BaseModel<IAppStatus> {
   constructor(args?: IAppStatus) {

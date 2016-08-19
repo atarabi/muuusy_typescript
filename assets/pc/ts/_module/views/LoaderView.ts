@@ -7,10 +7,12 @@ export default class LoaderView {
     this.$el = $(args.el);
     this.$el.html(loaderTmpl);
   }
-  show() {
+  show(): this {
     this.$el.show();
+    return this;
   }
-  hide() {
+  hide(): this {
     this.$el.fadeOut(400);
+    return this;
   }
 }
