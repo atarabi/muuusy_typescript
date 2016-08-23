@@ -2,10 +2,8 @@
  * スクリプトタスク
  * JSファイルをwebpackを使ってコンパイルして出力する
  */
-var gulp = require('gulp'),
-    path = require('path'),
-    webpack = require("gulp-webpack"),
-    named = require('vinyl-named');
+var gulp = require('gulp');
+var named = require('vinyl-named');
 var conf = require('../webpack.config.js');
 
 /**
@@ -17,22 +15,21 @@ function exeWebPack(watch) {
   conf.watch = watch;
   return gulp.src(__CONFIG.path.ts.src)
   .pipe(named())
-  .pipe(webpack(conf))
+  .pipe($.webpack(conf))
   // .pipe($.uglify()) //圧縮します
-  .pipe(gulp.dest(__CONFIG.path.js.dest))
-  .pipe($.browser.stream());
+  .pipe(gulp.dest(__CONFIG.path.js.dest));
 }
 
 /**
  * スクリプトコンパイルタスク
  */
-gulp.task('script', function() {
+gulp.task('script', function () {
   return exeWebPack(false);
 });
 
 /**
  * スクリプト監視タスク
  */
-gulp.task('watchScript', function() {
+gulp.task('watchScript', function () {
   return exeWebPack(true);
 });

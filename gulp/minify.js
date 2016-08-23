@@ -3,51 +3,48 @@
  * stylをコンパイルしてAutoprefixerをかける。プロダクションリリース時には圧縮する
  */
 var gulp = require('gulp');
-var _ = require('lodash');
-var jsonminify = require('gulp-jsonminify');
-var minifyHTML = require('gulp-minify-html');
+var saveLicense = require('uglify-save-license');
 
-module.exports = function () {
-  gulp.task('minify:img', function() {
-    return gulp.src(path.tmp+'/img/**/*')
+module.exports = (function () {
+
+  gulp.task('minify:img', function () {
+    return gulp.src(__CONFIG.path.img.dist)
       .pipe($.size({title: 'images:before'}))
       .pipe($.imagemin({
         progressive: true
       }))
-      .pipe(gulp.dest(path.dist+'/img/'))
+      .pipe(gulp.dest(__CONFIG.path.img.dest))
       .pipe($.size({title: 'images:after'}));
   });
 
-  gulp.task('minify:js', function() {
-    return gulp.src(path.tmp+'/js/*.js')
+  gulp.task('minify:js', function () {
+    return gulp.src(__CONFIG.path.js.dist)
       .pipe($.uglify({
         preserveComments: saveLicense
       }))
-      .pipe(gulp.dest(path.dist+'/js/'));
+      .pipe(gulp.dest(__CONFIG.path.js.dest));
   });
 
   gulp.task('minify:json', function () {
-    return gulp.src(path.tmp+'/json/*.json')
-      .pipe(jsonminify())
-      .pipe(gulp.dest(path.dist+'/json/'));
+    return gulp.src(__CONFIG.path.json.dist)
+      .pipe($.jsonminify())
+      .pipe(gulp.dest(__CONFIG.path.json.dest));
   });
 
-  gulp.task('minify:html', function() {
+  gulp.task('minify:html', function () {
     var opts = {
       conditionals: true,
       spare:true
     };
-    return gulp.src([
-        path.tmp+'/*.html',
-        path.tmp+'/**/*.html'
-      ])
-      .pipe(minifyHTML(opts))
-      .pipe(gulp.dest(path.dist+'/'));
+    return gulp.src(__CONFIG.path.html.dist)
+      .pipe($.minifyHtml(opts))
+      .pipe(gulp.dest(__CONFIG.path.html.dest));
   });
 
-  gulp.task('minify:css', function() {
-    return gulp.src(path.tmp+'/css/**/*.css')
+  gulp.task('minify:css', function () {
+    return gulp.src(__CONFIG.path.style.dist)
       .pipe($.pleeease())
-      .pipe(gulp.dest(path.dist+'/css/'));
+      .pipe(gulp.dest(__CONFIG.path.style.dest));
   });
-}();
+
+})();

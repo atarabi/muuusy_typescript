@@ -4,7 +4,7 @@
  */
 var gulp = require('gulp');
 
-module.exports = function () {
+module.exports = (function () {
   gulp.task('html', function () {
     return gulp.src(__CONFIG.path.html.src)
       .pipe($.plumber({errorHandler: $.notify.onError('<%= error.message %>')}))
@@ -12,4 +12,4 @@ module.exports = function () {
       .pipe($.htmlhint.reporter())
       .pipe($.htmlhint.failReporter());
   });
-}();
+})();
