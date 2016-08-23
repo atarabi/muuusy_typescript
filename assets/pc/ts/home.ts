@@ -10,4 +10,3 @@ const headerView = new HeaderView({
   el: '#header',
   model: appStatusModel
 });
-headerView.openPage('#homeView', '');

@@ -46,8 +46,9 @@ const parseData = (albums: [any]): [any] => {
 
 const getData = (url: string, term: string): Promise<any> => {
   return new Promise((resolve, reject) => {
-    const getFavs = (albums: [any]): void => {
+    const getFavs = (albums: any): void => {
       $.ajax(ajaxConf('/api/favs', '')).then((res: any) => {
+        albums = albums.results || albums;
         const resAlbum: [any] = (res.results) ? res.results : albums;
         const newAlbums: [any] = parseData(checkFav(albums, resAlbum));
         resolve(newAlbums);

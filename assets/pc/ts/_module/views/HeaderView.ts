@@ -14,6 +14,10 @@ const feedViewTmpl = require('../../../templates/home/_partials/homeView.ejs');
 const mypageViewTmpl = require('../../../templates/home/_partials/mypageView.ejs');
 const searchViewTmpl = require('../../../templates/home/_partials/searchView.ejs');
 
+interface IParamas {
+  hash: string;
+  term: string;
+}
 
 export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
   private $searchText: JQuery;
@@ -44,7 +48,6 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
       if (this.mypageView && this.mypageView.status.get.isLoading) { return false; }
       if (this.mypageView && !this.mypageView.status.get.isLoading) {
         this.mypageView.status.set = { isLoading: true };
-        console.log(this.mypageView.status.get.isLoading);
       }
       this.openPage('#mypageView', '');
     });
@@ -52,6 +55,7 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
       if (this.searchView && this.searchView.status.get.isLoading) { return false; }
       if (this.$searchText.val().length > 0) {
         e.preventDefault();
+        location.hash =  'search&term=' + this.$searchText.val();
         this.openPage('#searchView', this.$searchText.val());
       }
     });
@@ -59,6 +63,7 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
       if (this.searchView && this.searchView.status.get.isLoading) { return false; }
       if (checkEnterKeypress(e) && $(e.currentTarget).val().length > 0) {
         $(e.currentTarget).blur();
+        location.hash =  'search&term=' + $(e.currentTarget).val();
         this.openPage('#searchView', $(e.currentTarget).val());
       }
     });
@@ -71,6 +76,43 @@ export default class HeaderView extends BaseView<IAppStatus, IAlbum> {
     this.$searchTrigger.off();
     this.$searchText.off();
     return this;
+  }
+  protected setFn(): this {
+    super.setFn();
+    this.routing();
+    return this;
+  }
+  routing(): this {
+    const params: IParamas = this.parseParam(location.hash);
+    console.log(params);
+    switch (params.hash) {
+      case 'mypage':
+        this.openPage('#mypageView', '');
+        break;
+      case 'search':
+        this.$searchText.val(params.term);
+        this.openPage('#searchView', this.$searchText.val());
+        break;
+      default:
+        this.openPage('#homeView', '');
+        break;
+    }
+    return this;
+  }
+  parseParam(param: string): IParamas {
+    const params = param.split('&');
+    let newParams: IParamas = { hash: '', term: '' };
+    params.forEach((param) => {
+      if (param.charAt(0) === '#') {
+        const paramArray = param.split('#');
+        newParams.hash = paramArray[1];
+      } else {
+        const paramArray = param.split('=');
+        if (!paramArray[1]) { return; }
+        newParams[paramArray[0]] = paramArray[1];
+      }
+    });
+    return newParams;
   }
   openPage(id: string, term: string): void {
     const $view = $(id);
