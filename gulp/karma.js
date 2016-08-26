@@ -1,28 +1,24 @@
-/**
- * ユニットタスク
- * karmaを使ってユニットテストを実行する
- */
-var gulp = require('gulp');
-var Server = require('karma').Server;
-var runner = require('karma').runner;
+const gulp = require('gulp');
+const Server = require('karma').Server;
+const runner = require('karma').runner;
 
-gulp.task('runTest', function(callback) {
+gulp.task('runTest', (callback) => {
   runner.run({
     configFile: process.cwd() + '/karma.conf.js'
-  },function(exitCode) {
+  }, (exitCode) => {
     process.exit(exitCode);
     callback();
   });
 });
 
-gulp.task('test', function(callback) {
+gulp.task('test', (callback) => {
   new Server({
     configFile: process.cwd() + '/karma.conf.js',
     singleRun: true,
     autoWatch: false
   }).start({}, callback);
 });
-gulp.task('watchTest', function(callback) {
+gulp.task('watchTest', (callback) => {
   new Server({
     configFile: process.cwd() + '/karma.conf.js',
     singleRun: false,

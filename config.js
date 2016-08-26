@@ -1,12 +1,6 @@
-/**
- * タスク設定ファイル
- */
 module.exports = {
-    // 出力先ディレクトリ
     dist: 'dist/%type%',
-    // gulpコマンドでデフォルトで監視するディレクトリ(assets/*/)
     defaultPath: 'pc',
-    // サーバー設定
     server: {
       ghostMode: {
         clicks: false,
@@ -15,7 +9,6 @@ module.exports = {
         scroll: false
       }
     },
-    // パス設定
     path: {
       html: {
         src: 'dist/%type%/**/*.html'

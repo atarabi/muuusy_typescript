@@ -5,14 +5,16 @@
     "jquery": true,
 
     "globals": {
-      "JSON": false
+      "JSON": false,
+      "__CONFIG": true
     },
 
     "bitwise": true,
     "curly": true,
     "devel": true,
     "eqeqeq": true,
-    "es3": true,
+    "es3": false,
+    "esnext": true,
     "forin": true,
     "freeze": true,
     "immed": false,
