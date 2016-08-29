@@ -1,15 +1,31 @@
 # TypeScript Sample
 
+
+## Overview
+
+Sample SPA for Typescript.  
+
+- TypeScript, Babel(ES6), webpack(CommonJS)
+- TDD by Mocha, Power-Assert, Sinon
+
+
+## Usage
+
 ```
 $ npm install
 ```
 
-## 概要
+watch and server  
 
-- TypeScript、Babel、webpackを用いた静的型付け+ES6の開発環境。  
-- Mocha, Power-Assert、Sinonを用いたTDD。
+```
+$ gulp
+```
 
-※Babelを利用する場合はES5ベースになるので、IE9以上のモダンブラウザのみ対応。
+distribution  
+
+```
+$ gulp dist
+```
 
 
 ## HTML
@@ -18,13 +34,13 @@ assets
 
 ```javascript
 templates/
-  _partiales/... //出力されません
+  _partiales/...
   index.html
   top/index.html
   top/samplePage.html
 ```
 
-dist後
+dist
 
 ```javascript
 index.html
@@ -39,13 +55,13 @@ assets
 
 ```javascript
 styl/
-  _common/... // 出力されません
+  _common/...
   index/...
   top/...
   samplePage/...
 ```
 
-dist時に各ページ一枚のcommon.cssにまとめます。
+dist
 
 ```javascript
 css/
@@ -60,7 +76,7 @@ assets
 
 ```javascript
 js/
-  _module/ // 出力されません
+  _module/
     common/...
     fn/...
     lib/...
@@ -73,7 +89,7 @@ js/
   samplePage.js
 ```
 
-dist後
+dist
 
 ```javascript
 js/
@@ -91,35 +107,20 @@ img/
   common/...
   index/...
   samplePage/...
-_imgSprites/... // 出力されません
+_imgSprites/...
 ```
 
-dist後
+dist
 
 ```javascript
 img/
-  common/sprites.png // spritesはcommon内に一枚だけ作成します
+  common/sprites.png
   index/...
   samplePage/...
 ```
 
-### ファイル監視の実行 & サーバー起動
 
-```
-# ディレクトリを監視(assets/pc)
-$ gulp
-
-# 指定ディレクトリを監視（assets/spディレクトリを監視する例)
-$ gulp -sp
-```
-
-### リリースファイル作成
-
-```
-$ gulp dist
-```
-
-### 個別タスク
+### Tasks
 
 ```
 $ gulp clean
@@ -132,7 +133,7 @@ $ gulp sprite
 $ gulp style
 ```
 
-### 使用ツール
+### Tools
 
 - [TypeScript](https://www.typescriptlang.org/index.html)
 - [HTMLHint](http://htmlhint.com/)
